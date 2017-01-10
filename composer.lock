@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "afe8a985cba9a07744ea4adcb73331ac",
-    "content-hash": "28648c073f71bd0f237e9ae1573b4f50",
+    "hash": "49ef1210b2d4ebfe3122d5c91d796a55",
+    "content-hash": "7b42cf4b22dca62a9a8b0f5c1eb0eee4",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -621,16 +621,16 @@
         },
         {
             "name": "katsana/socialite",
-            "version": "dev-master",
+            "version": "v0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/katsana/katsana-socialite.git",
-                "reference": "b90bf64194a0465bc2874052c2d1a7dacea95565"
+                "reference": "5d28cb43735aed526925f55d029a8d42ea476512"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/katsana/katsana-socialite/zipball/b90bf64194a0465bc2874052c2d1a7dacea95565",
-                "reference": "b90bf64194a0465bc2874052c2d1a7dacea95565",
+                "url": "https://api.github.com/repos/katsana/katsana-socialite/zipball/5d28cb43735aed526925f55d029a8d42ea476512",
+                "reference": "5d28cb43735aed526925f55d029a8d42ea476512",
                 "shasum": ""
             },
             "require": {
@@ -663,7 +663,7 @@
                 }
             ],
             "description": "KATSANA Socialite Provider",
-            "time": "2017-01-10 10:51:35"
+            "time": "2017-01-10 10:42:44"
         },
         {
             "name": "laravel/framework",
@@ -4845,9 +4845,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "katsana/socialite": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

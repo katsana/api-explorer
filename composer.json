@@ -6,7 +6,7 @@
     "require": {
         "php": ">=7.0",
         "katsana/katsana-sdk-php": "~0.1",
-        "katsana/socialite": "dev-master",
+        "katsana/socialite": "~0.1",
         "laravel/framework": "5.3.*",
         "orchestra/oneauth": "~3.3",
         "php-http/guzzle6-adapter": "^1.1",
@@ -15,7 +15,7 @@
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "laravel/homestead": "^4.0",
-        "mockery/mockery": "0.9.*",
+        "mockery/mockery": "^0.9.4",
         "phpunit/phpunit": "~5.0",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*"
