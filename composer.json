@@ -8,7 +8,8 @@
         "katsana/katsana-sdk-php": "~0.1",
         "katsana/socialite": "dev-master",
         "laravel/framework": "5.3.*",
-        "php-http/guzzle6-adapter": "^1.1"
+        "php-http/guzzle6-adapter": "^1.1",
+        "predis/predis": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
