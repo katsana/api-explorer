@@ -1,8 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "katsana/api-explorer",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
-    "license": "MIT",
+    "license": "BSD-3-Clause",
     "type": "project",
     "require": {
         "php": ">=7.0",
