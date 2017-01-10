@@ -15,5 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('start', function () {
+    $user = Socialite::driver('katsana')->userFromToken(Session::get('token'));
+
+    dd($user->user);
+});
+
 Route::get('social/connect', 'Auth\SocialController@redirectToProvider');
 Route::get('social/callback', 'Auth\SocialController@handleProviderCallback');
