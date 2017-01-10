@@ -74,7 +74,9 @@
             @endif
 
             <div class="content">
-                <img src="{{ asset('images/katsana.png') }}" width="120" height="120">
+                <a href="{{ url('social/connect') }}">
+                    <img src="{{ asset('images/katsana.png') }}" width="120" height="120">
+                </a>
                 <div class="title m-b-md">
                     API Explorer
                 </div>

@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \Katsana\Socialite\Provider::setEndpoint(
+            config('explorer.environments.carbon.endpoints')
+        );
     }
 
     /**
