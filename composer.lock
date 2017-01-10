@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "49ef1210b2d4ebfe3122d5c91d796a55",
-    "content-hash": "7b42cf4b22dca62a9a8b0f5c1eb0eee4",
+    "hash": "a8c8831702662ed60afacc631d233947",
+    "content-hash": "d0faa810c938a19d65090711176987ef",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -570,6 +570,55 @@
                 "tokenizer"
             ],
             "time": "2016-12-07 09:37:55"
+        },
+        {
+            "name": "katsana/katsana-sdk-laravel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/katsana/katsana-sdk-laravel.git",
+                "reference": "02ee36d5766dae25636584f7fc688a1ee1635830"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/katsana/katsana-sdk-laravel/zipball/02ee36d5766dae25636584f7fc688a1ee1635830",
+                "reference": "02ee36d5766dae25636584f7fc688a1ee1635830",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.1",
+                "katsana/katsana-sdk-php": "~0.1",
+                "php": ">=5.5",
+                "php-http/guzzle6-adapter": "^1.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~1.11",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Katsana\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "KATSANA Developer",
+                    "email": "developer@katsana.com"
+                }
+            ],
+            "description": "KATSANA SDK for Laravel",
+            "time": "2017-01-10 13:48:05"
         },
         {
             "name": "katsana/katsana-sdk-php",
@@ -1269,160 +1318,6 @@
                 "php"
             ],
             "time": "2016-12-06 11:30:35"
-        },
-        {
-            "name": "orchestra/contracts",
-            "version": "v3.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orchestral/contracts.git",
-                "reference": "67f1ac836f42641936af380844ff75e9bb08227f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/contracts/zipball/67f1ac836f42641936af380844ff75e9bb08227f",
-                "reference": "67f1ac836f42641936af380844ff75e9bb08227f",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "~5.3.0",
-                "php": ">=5.6.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Orchestra\\Contracts\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mior Muhammad Zaki",
-                    "email": "crynobone@gmail.com",
-                    "homepage": "https://github.com/crynobone"
-                }
-            ],
-            "description": "Contracts for Orchestra Platform",
-            "keywords": [
-                "contracts",
-                "orchestra-platform",
-                "orchestral"
-            ],
-            "time": "2016-12-16 11:11:18"
-        },
-        {
-            "name": "orchestra/oneauth",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orchestral/oneauth.git",
-                "reference": "e4db43a5db5f8c299f549325e33dfdbe493a8115"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/oneauth/zipball/e4db43a5db5f8c299f549325e33dfdbe493a8115",
-                "reference": "e4db43a5db5f8c299f549325e33dfdbe493a8115",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/socialite": "~2.0",
-                "orchestra/support-providers": "~3.3.0",
-                "php": ">=5.6.0"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "~2.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Orchestra\\OneAuth\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mior Muhammad Zaki",
-                    "email": "crynobone@gmail.com",
-                    "homepage": "https://github.com/crynobone"
-                }
-            ],
-            "description": "Social Authentication Extension for Orchestra Platform",
-            "keywords": [
-                "orchestra-platform",
-                "orchestral",
-                "social-login"
-            ],
-            "time": "2017-01-10 07:38:10"
-        },
-        {
-            "name": "orchestra/support-providers",
-            "version": "v3.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orchestral/support-providers.git",
-                "reference": "4dc04db5a15d486c301438f12c6e4d657644d0d1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/support-providers/zipball/4dc04db5a15d486c301438f12c6e4d657644d0d1",
-                "reference": "4dc04db5a15d486c301438f12c6e4d657644d0d1",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.3.0",
-                "orchestra/contracts": "~3.3.0",
-                "php": ">=5.6.0"
-            },
-            "suggest": {
-                "laravel/framework": "Allow using orchestra/support component outside of Orchestra Platform (~5.3).",
-                "orchestra/foundation": "Allow using orchestra/support with Orchestra Platform (~3.3)."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Orchestra\\Support\\Providers\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mior Muhammad Zaki",
-                    "email": "crynobone@gmail.com",
-                    "homepage": "https://github.com/crynobone"
-                }
-            ],
-            "description": "Support (Providers) Component for Laravel and Orchestra Platform",
-            "homepage": "http://orchestraplatform.com/docs/latest/components/support/",
-            "keywords": [
-                "laravel",
-                "orchestra-platform",
-                "orchestral"
-            ],
-            "time": "2016-08-29 07:48:50"
         },
         {
             "name": "paragonie/random_compat",
