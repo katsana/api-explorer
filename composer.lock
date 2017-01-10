@@ -625,12 +625,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/katsana/katsana-socialite.git",
-                "reference": "90f43e69b9dd6c187f936bf6d34f58fde1692d80"
+                "reference": "b90bf64194a0465bc2874052c2d1a7dacea95565"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/katsana/katsana-socialite/zipball/90f43e69b9dd6c187f936bf6d34f58fde1692d80",
-                "reference": "90f43e69b9dd6c187f936bf6d34f58fde1692d80",
+                "url": "https://api.github.com/repos/katsana/katsana-socialite/zipball/b90bf64194a0465bc2874052c2d1a7dacea95565",
+                "reference": "b90bf64194a0465bc2874052c2d1a7dacea95565",
                 "shasum": ""
             },
             "require": {
@@ -638,7 +638,15 @@
                 "php": ">=5.5",
                 "socialiteproviders/manager": "~2.1"
             },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Katsana\\Socialite\\": "src/"
@@ -646,7 +654,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
@@ -655,7 +663,7 @@
                 }
             ],
             "description": "KATSANA Socialite Provider",
-            "time": "2017-01-10 09:54:11"
+            "time": "2017-01-10 10:51:35"
         },
         {
             "name": "laravel/framework",
