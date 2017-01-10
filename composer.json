@@ -8,6 +8,7 @@
         "katsana/katsana-sdk-php": "~0.1",
         "katsana/socialite": "dev-master",
         "laravel/framework": "5.3.*",
+        "orchestra/oneauth": "~3.3",
         "php-http/guzzle6-adapter": "^1.1",
         "predis/predis": "~1.0"
     },
