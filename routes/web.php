@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Routing\Router;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,15 +13,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('guest');
-
-Route::get('start', function () {
+$router->get('start', function () {
     $user = Socialite::driver('katsana')->userFromToken(Session::get('token'));
 
     dd($user->user);
-})->middleware('access');
+})->middleware('auth');
 
-Route::get('social/connect', 'Auth\SocialController@redirectToProvider');
-Route::get('social/callback', 'Auth\SocialController@handleProviderCallback');
+$router->group(['middleware' => 'guest'], function (Router $router) {
+    $router->get('/', function () {
+        return view('welcome');
+    });
+
+    $router->group(['prefix' => 'social'], function (Router $router) {
+        $router->get('connect', 'Auth\SocialController@redirectToProvider');
+        $router->get('callback', 'Auth\SocialController@handleProviderCallback');
+    });
+});
