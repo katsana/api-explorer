@@ -168,6 +168,7 @@ return [
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
+        Katsana\ServiceProvider::class,
 
         /*
          * Application Service Providers...

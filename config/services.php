@@ -15,6 +15,7 @@ return [
     */
 
     'katsana' => [
+        'environment' => env('KATSANA_ENV', 'production'),
         'client_id' => env('KATSANA_KEY'),
         'client_secret' => env('KATSANA_SECRET'),
         'redirect' => null,

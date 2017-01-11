@@ -22,6 +22,12 @@ sites:
 databases:
     - explorer
 
+variables:
+    - key: APP_ENV
+      value: local
+    - key: KATSANA_ENV
+      value: carbon
+
 # blackfire:
 #     - id: foo
 #       token: bar
