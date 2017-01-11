@@ -32,6 +32,10 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
+        'access' => [
+            \App\Http\Middleware\WithValidAccessToken::class,
+        ],
+
         'api' => [
             'throttle:60,1',
             'bindings',

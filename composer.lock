@@ -621,16 +621,16 @@
         },
         {
             "name": "katsana/katsana-sdk-php",
-            "version": "dev-develop",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/katsana/katsana-sdk-php.git",
-                "reference": "dd70a4dd2b14ce8c8ca220accdb2249b1437f769"
+                "reference": "73ff89f7f1e5d671f1b603c11e6c85925ca8afcd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/katsana/katsana-sdk-php/zipball/dd70a4dd2b14ce8c8ca220accdb2249b1437f769",
-                "reference": "dd70a4dd2b14ce8c8ca220accdb2249b1437f769",
+                "url": "https://api.github.com/repos/katsana/katsana-sdk-php/zipball/73ff89f7f1e5d671f1b603c11e6c85925ca8afcd",
+                "reference": "73ff89f7f1e5d671f1b603c11e6c85925ca8afcd",
                 "shasum": ""
             },
             "require": {
@@ -645,8 +645,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1-dev",
-                    "dev-develop": "0.2-dev"
+                    "dev-master": "0.1-dev"
                 }
             },
             "autoload": {
@@ -665,7 +664,7 @@
                 }
             ],
             "description": "KATSANA SDK for PHP",
-            "time": "2016-12-16T15:53:43+00:00"
+            "time": "2017-01-11T01:42:54+00:00"
         },
         {
             "name": "katsana/socialite",
@@ -673,12 +672,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/katsana/katsana-socialite.git",
-                "reference": "e290e3921848b712ddedcb6e7982901269e6889e"
+                "reference": "3f3c0199469146d6aa3e3f4a8f1a204a53f8dedd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/katsana/katsana-socialite/zipball/e290e3921848b712ddedcb6e7982901269e6889e",
-                "reference": "e290e3921848b712ddedcb6e7982901269e6889e",
+                "url": "https://api.github.com/repos/katsana/katsana-socialite/zipball/3f3c0199469146d6aa3e3f4a8f1a204a53f8dedd",
+                "reference": "3f3c0199469146d6aa3e3f4a8f1a204a53f8dedd",
                 "shasum": ""
             },
             "require": {
@@ -715,7 +714,7 @@
                 }
             ],
             "description": "KATSANA Socialite Provider",
-            "time": "2017-01-11T03:28:45+00:00"
+            "time": "2017-01-11T06:42:15+00:00"
         },
         {
             "name": "laravel/framework",
