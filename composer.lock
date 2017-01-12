@@ -672,12 +672,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/katsana/katsana-socialite.git",
-                "reference": "3f3c0199469146d6aa3e3f4a8f1a204a53f8dedd"
+                "reference": "e975db83d617f9485b8a8ac5828868067e420737"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/katsana/katsana-socialite/zipball/3f3c0199469146d6aa3e3f4a8f1a204a53f8dedd",
-                "reference": "3f3c0199469146d6aa3e3f4a8f1a204a53f8dedd",
+                "url": "https://api.github.com/repos/katsana/katsana-socialite/zipball/e975db83d617f9485b8a8ac5828868067e420737",
+                "reference": "e975db83d617f9485b8a8ac5828868067e420737",
                 "shasum": ""
             },
             "require": {
@@ -714,7 +714,7 @@
                 }
             ],
             "description": "KATSANA Socialite Provider",
-            "time": "2017-01-11T06:42:15+00:00"
+            "time": "2017-01-12T01:47:13+00:00"
         },
         {
             "name": "laravel/framework",
