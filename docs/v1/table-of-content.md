@@ -40,6 +40,13 @@ title: Table of Content
     </ul>
   </li>
   <li><a href="#">Sharing</a></li>
-  <li><a href="#">Summaries</a></li>
-  <li><a href="#">Travels</a></li>
+  <li class="open has-child">
+    <a href="{doc-url}/vehicles/travels">Travels</a>
+    <ul>
+      <li><a href="{doc-url}/vehicles/travels#today">Today</a></li>
+      <li><a href="{doc-url}/vehicles/travels#yesterday">Yesterday</a></li>
+      <li><a href="{doc-url}/vehicles/travels#date">Date</a></li>
+    </ul>
+  </li>
+  <li><a href="{doc-url}/vehicles/summaries">Summaries</a></li>
 </ul>

@@ -26,7 +26,7 @@ $router->group(['prefix' => '{version?}'], function (Router $router) {
         dd($user->user);
     })->middleware('auth');
 
-    $router->get('{filename}', 'DocumentationController@show');
+    $router->get('{filename}', 'DocumentationController@show')->where('filename', '(.+)?');;
     $router->get('/', 'DocumentationController@index');
 
     $router->group(['middleware' => 'guest'], function (Router $router) {

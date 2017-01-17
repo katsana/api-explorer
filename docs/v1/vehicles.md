@@ -87,7 +87,7 @@ Show single vehicle owned or viewable by the authenticated user.
 
 ```bash
 curl --request GET \
-    --url https://api.katsana.com/vehicles/105 \
+    --url https://api.katsana.com/vehicles/:id \
     --header 'accept: application/vnd.KATSANA.v1+json' \
     --header 'authorization: Bearer {{access-token}}'
 ```
@@ -147,7 +147,7 @@ Get current location for a vehicle.
 
 ```bash
 curl --request GET \
-    --url https://api.katsana.com/vehicles/105/location \
+    --url https://api.katsana.com/vehicles/:id/location \
     --header 'accept: application/vnd.KATSANA.v1+json' \
     --header 'authorization: Bearer {{access-token}}'
 ```
