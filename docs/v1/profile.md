@@ -145,8 +145,8 @@ curl --request POST \
 
 ```json
 {
-    "url": "https://carbon.katsana.com/pictures/user-5/0153cf08-31e2-11e6-99b7-08002777c33d.jpg",
-    "thumb": "https://carbon.katsana.com/pictures/user-5/0153cf08-31e2-11e6-99b7-08002777c33d.thumb.jpg",
-    "marker": "https://carbon.katsana.com/pictures/user-5/0153cf08-31e2-11e6-99b7-08002777c33d.marker.jpg"
+    "url": "https://my.katsana.com/pictures/user-73/0153cf08-31e2-11e6-99b7-08002777c33d.jpg",
+    "thumb": "https://my.katsana.com/pictures/user-73/0153cf08-31e2-11e6-99b7-08002777c33d.thumb.jpg",
+    "marker": "https://my.katsana.com/pictures/user-73/0153cf08-31e2-11e6-99b7-08002777c33d.marker.jpg"
 }
 ```
