@@ -113,7 +113,7 @@ curl --request PATCH \
 }
 ```
 
-## Upload Avatar {#avatar}
+## Upload Avatar {#upload-avatar}
 
 ### API Endpoint
 

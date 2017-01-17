@@ -39,7 +39,14 @@ title: Table of Content
       <li><a href="{doc-url}/vehicles#vehicle-location">Vehicle Location</a></li>
     </ul>
   </li>
-  <li><a href="{doc-url}/profile">User Profile</a></li>
+  <li>
+    <a href="{doc-url}/profile">User Profile</a>
+    <ul>
+      <li><a href="{doc-url}/profile#show">Show Profile</a></li>
+      <li><a href="{doc-url}/profile#update">Update Profile</a></li>
+      <li><a href="{doc-url}/profile#upload-avatar">Upload Avatar</a></li>
+    </ul>
+  </li>
   <li><a href="#">Sharing</a></li>
   <li class="open has-child">
     <a href="{doc-url}/vehicles/travels">Travels</a>
