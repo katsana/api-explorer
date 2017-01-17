@@ -153,10 +153,10 @@ curl --request GET \
 
 ### Headers
 
-| Type          | Value                            | Required
-|:--------------|:---------------------------------|:---------
-| Accept        | application/vnd.KATSANA.v1+json  | Yes
-| Authorization | Bearer {{access-token}}          | Yes
+| Type          | Value                             | Required
+|:--------------|:----------------------------------|:---------
+| Accept        | `application/vnd.KATSANA.v1+json` | Yes
+| Authorization | `Bearer {{access-token}}`         | Yes
 
 ### Request
 
