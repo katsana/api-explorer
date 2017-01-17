@@ -48,5 +48,14 @@ title: Table of Content
       <li><a href="{doc-url}/vehicles/travels#date">Date</a></li>
     </ul>
   </li>
-  <li><a href="{doc-url}/vehicles/summaries">Summaries</a></li>
+  <li class="open has-child">
+    <a href="{doc-url}/vehicles/summaries">Summaries</a>
+    <ul>
+      <li><a href="{doc-url}/vehicles/summaries#today">Today</a></li>
+      <li><a href="{doc-url}/vehicles/summaries#yesterday">Yesterday</a></li>
+      <li><a href="{doc-url}/vehicles/summaries#date">Date</a></li>
+      <li><a href="{doc-url}/vehicles/summaries#duration">Duration</a></li>
+      <li><a href="{doc-url}/vehicles/summaries#month">Month</a></li>
+    </ul>
+  </li>
 </ul>
