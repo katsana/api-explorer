@@ -215,7 +215,7 @@ $(function() {
 
 
   //Equal height for grid view
-  $('.grid-view > li, .categorized-view > li, .promo.small-icon').matchHeight();
+  // $('.grid-view > li, .categorized-view > li, .promo.small-icon').matchHeight();
 
   //
   // Code viewers
