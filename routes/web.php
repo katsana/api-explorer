@@ -14,7 +14,7 @@ use Katsana\Sdk\Exceptions\UnauthorizedHttpException;
 |
 */
 
-$router->group(['prefix' => '{version}'], function (Router $router) {
+$router->group(['prefix' => '{version?}'], function (Router $router) {
     $router->get('start', function () {
         try {
             $user = Socialite::driver('katsana')->userFromToken(Session::get('token'));

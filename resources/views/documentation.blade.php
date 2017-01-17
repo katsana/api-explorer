@@ -1,10 +1,10 @@
 @extends('template.main')
 
 @section('sidebar')
-{!! $toc->getHtmlContent() !!}
+{!! $html['toc'] !!}
 @stop
 
 @section('content')
 <h1>{{ $document->get('title') }}</h1>
-{!! $document->getHtmlContent() !!}
+{!! $html['document'] !!}
 @stop

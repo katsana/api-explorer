@@ -103,13 +103,13 @@ class FileLoader
      */
     protected function loadContent($file)
     {
-        return $this->cache->rememberForever("doc.{$file}", function () use ($file) {
+        //return $this->cache->rememberForever("doc.{$file}", function () use ($file) {
             $this->validateFileDoesExist($file);
 
             $content = $this->files->get($file);
 
             return $this->getParser()->parse($content);
-        });
+        //});
     }
 
     /**

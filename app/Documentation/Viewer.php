@@ -88,7 +88,9 @@ class Viewer
      */
     public function parseMarkdown(Document $content, $version)
     {
-        return $this->parseContent($content->getHtmlContent(), $version);
+        $content->setContent($this->parseContent($content->getContent(), $version));
+
+        return $content->getHtmlContent();
     }
 
     /**
@@ -102,7 +104,7 @@ class Viewer
     public function parseContent($content, $version)
     {
         $replacement = [
-            'doc-url' => url("{$version}"),
+            'doc-url' => url($version),
         ];
 
         return Str::replace($content, $replacement);
