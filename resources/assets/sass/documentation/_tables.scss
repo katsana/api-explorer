@@ -1,0 +1,106 @@
+/*------------------------------------
+- Tables
+------------------------------------*/
+
+.table-info {
+
+  font-weight: 300;
+  
+  tr > td:first-child {
+    font-weight: 400;
+    padding-right: 10px;
+  }
+}
+
+.table-changelog thead > tr > th:first-child,
+.table-changelog tr > td:first-child {
+  width: 100px;
+}
+
+.table-changelog > tbody > tr >td,
+.table-changelog > tbody > tr >th,
+.table-changelog > tfoot > tr >td,
+.table-changelog > tfoot > tr >th,
+.table-changelog > thead > tr >td,
+.table-changelog > thead > tr >th {
+  border-top-width: 0;
+}
+
+.table-bordered.table-changelog > tbody > tr >td,
+.table-bordered.table-changelog > tbody > tr >th,
+.table-bordered.table-changelog > tfoot > tr >td,
+.table-bordered.table-changelog > tfoot > tr >th,
+.table-bordered.table-changelog > thead > tr >td,
+.table-bordered.table-changelog > thead > tr >th {
+  border-top-width: 1px;
+}
+
+.change {
+  display: inline-block;
+  width: 70px;
+  padding: 7px 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  color: $color-white;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+.change-added   { background-color: $color-success; }
+.change-fixed   { background-color: $color-warning; }
+.change-removed { background-color: $color-danger; }
+.change-updated { background-color: $color-info; }
+.change-moved   { background-color: $color-purple; }
+.change-merged  { background-color: $color-teal; }
+
+.change-added:after   { content: "Added"; }
+.change-fixed:after   { content: "Fixed"; }
+.change-removed:after { content: "Removed"; }
+.change-updated:after { content: "Updated"; }
+.change-moved:after   { content: "Moved"; }
+.change-merged:after  { content: "Merged"; }
+
+// Changelog list
+.changelog {
+  padding-left: 0;
+  list-style: none;
+  margin-left: 24px;
+  margin-right: 24px;
+
+  > li {
+    display: block;
+    position: relative;
+    padding-left: 96px;
+    margin-bottom: 12px;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      width: 70px;
+      padding: 7px 0;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1;
+      color: $color-white;
+      letter-spacing: 1px;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: .25em;
+      position: absolute;
+      left: 0;
+      top: 2px;
+    }
+  }
+
+  .ch-added:before   { @include changelog-type("Added", $color-success); }
+  .ch-fixed:before   { @include changelog-type("Fixed", $color-warning); }
+  .ch-removed:before { @include changelog-type("Removed", $color-danger); }
+  .ch-updated:before { @include changelog-type("Updated", $color-info); }
+  .ch-moved:before   { @include changelog-type("Moved", $color-purple); }
+  .ch-merged:before  { @include changelog-type("Merged", $color-teal); }
+
+}

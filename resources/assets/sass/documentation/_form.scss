@@ -1,0 +1,24 @@
+/*------------------------------------
+- Form elements
+------------------------------------*/
+
+.form-control {
+  width: 100%;
+  padding: 6px 12px;
+  margin-bottom: 20px;
+  border: 1px solid $border-color;
+  color: $pale-text-color;
+  border-radius: 0;
+  font-size: 15px;
+  letter-spacing: 1px;
+  box-shadow: none;
+  transition: .5s ease;
+
+  &:focus {
+    color: $gray-text-color;
+    border-color: $pale-text-color;
+    outline: none;
+    box-shadow: none;
+  }
+
+}

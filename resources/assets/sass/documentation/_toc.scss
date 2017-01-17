@@ -1,0 +1,78 @@
+/*------------------------------------
+- Table of content
+------------------------------------*/
+
+.toc {
+  position: relative;
+  list-style: none;
+  padding: 50px 20px 20px 30px;
+  margin-top: 40px;
+  margin-bottom: 0;
+  line-height: 30px;
+  background-color: $bg-color;
+  counter-reset: toc1;
+
+  a {
+    color: $toc-text-color;
+    transition: .3s ease;
+    
+    &:hover,
+    &:active {
+      text-decoration: none;
+      color: $accent-color;
+    }
+  }
+  
+  > li:before {
+    content: counter(toc1) ". ";
+    counter-increment: toc1;
+  }
+
+  > li > ol {
+    counter-reset: toc2;
+
+    > li:before {
+      content: counter(toc1) "." counter(toc2) ". ";
+      counter-increment: toc2;
+    }
+
+    > li > ol {
+      counter-reset: toc3;
+
+      > li:before {
+        content: counter(toc1) "." counter(toc2) ". " counter(toc3) ". ";
+        counter-increment: toc3;
+      }
+    }
+  }
+
+  ol {
+    list-style: none;
+    padding-left: 25px;
+    line-height: 23px;
+  }
+
+  ol li:last-child {
+    margin-bottom: 10px;
+  }
+
+  > li:before,
+  ol li:before {
+    color: $toc-text-color;
+    font-weight: 500;
+    font-size: 14px;
+    margin-right: 5px;
+  }
+
+  &:before {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    content: "Table of content";
+    color: $pale-text-color;
+  }
+}

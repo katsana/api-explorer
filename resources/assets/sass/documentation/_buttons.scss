@@ -1,0 +1,143 @@
+/*------------------------------------
+- Buttons
+------------------------------------*/
+
+// Base styles
+// -------------------------
+.btn {
+  border-radius: 2px;
+  border: none;
+  transition: .3s ease;
+  @include remove-outline;
+}
+
+.btn-lg {
+  border-radius: 4px;
+}
+
+.btn-xl {
+  padding: 14px 24px;
+  font-size: 20px;
+  line-height: 1.6666666;
+  border-radius: 6px;
+}
+
+.btn-default {
+  background-color: $btn-default-bg-color;
+  color: $color-default;
+}
+
+.btn-purple,
+.btn-teal,
+.btn-dark {
+  color: $color-white;
+  @include btn-color($color-white);
+}
+
+.btn-primary { background-color: $color-primary; }
+.btn-success { background-color: $color-success; }
+.btn-info    { background-color: $color-info; }
+.btn-warning { background-color: $color-warning; }
+.btn-danger  { background-color: $color-danger; }
+.btn-purple  { background-color: $color-purple; }
+.btn-teal    { background-color: $color-teal; }
+.btn-dark    { background-color: $color-dark; }
+.btn-white   { background-color: $color-white; }
+
+
+.btn-primary {
+  @include btn-bg-color($color-primary-darker);
+}
+
+.btn-success {
+  @include btn-bg-color($color-success-darker);
+}
+
+.btn-info {
+  @include btn-bg-color($color-info-darker);
+}
+
+.btn-warning {
+  @include btn-bg-color($color-warning-darker);
+}
+
+.btn-danger {
+  @include btn-bg-color($color-danger-darker);
+}
+
+.btn-purple {
+  @include btn-bg-color($color-purple-darker);
+}
+
+.btn-teal {
+  @include btn-bg-color($color-teal-darker);
+}
+
+.btn-dark {
+  @include btn-bg-color($color-dark-darker);
+}
+
+.btn-white {
+  @include btn-bg-color($color-white-darker);
+  color: $gray-text-color;
+  @include btn-color($color-dark, true);
+}
+
+
+// Outline buttons
+// ----------------------------------------------------------
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  
+  @include btn-color($color-white, true);
+}
+
+.btn-outline.btn-white {
+  @include btn-color($text-color, true);
+}
+
+.btn-outline.btn-default {
+  @include btn-text-and-border-color($color-default);
+  @include btn-bg-color($color-default-darker);
+}
+.btn-outline.btn-primary { @include btn-text-and-border-color($color-primary); }
+.btn-outline.btn-success { @include btn-text-and-border-color($color-success); }
+.btn-outline.btn-info    { @include btn-text-and-border-color($color-info); }
+.btn-outline.btn-warning { @include btn-text-and-border-color($color-warning); }
+.btn-outline.btn-danger  { @include btn-text-and-border-color($color-danger); }
+.btn-outline.btn-purple  { @include btn-text-and-border-color($color-purple); }
+.btn-outline.btn-teal    { @include btn-text-and-border-color($color-teal); }
+.btn-outline.btn-dark    { @include btn-text-and-border-color($color-dark); }
+.btn-outline.btn-white   { @include btn-text-and-border-color($color-white); }
+
+// Round buttons
+// ------------------------------------------------------------
+.btn-round {
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 17px;
+  padding: 6px 16px;
+  
+  @include btn-color($color-white, true);
+}
+
+.btn-round.btn-xs { border-radius: 11px; padding: 1px 8px; }
+.btn-round.btn-sm { border-radius: 15px; padding: 6px 12px; }
+.btn-round.btn-lg { border-radius: 23px; padding: 10px 20px; }
+
+.btn-round.btn-default { @include btn-text-and-border-color($color-default); }
+.btn-round.btn-primary { @include btn-text-and-border-color($color-primary); }
+.btn-round.btn-success { @include btn-text-and-border-color($color-success); }
+.btn-round.btn-info    { @include btn-text-and-border-color($color-info); }
+.btn-round.btn-warning { @include btn-text-and-border-color($color-warning); }
+.btn-round.btn-danger  { @include btn-text-and-border-color($color-danger); }
+.btn-round.btn-purple  { @include btn-text-and-border-color($color-purple); }
+.btn-round.btn-teal    { @include btn-text-and-border-color($color-teal); }
+.btn-round.btn-dark    { @include btn-text-and-border-color($color-dark); }
+.btn-round.btn-white   { @include btn-text-and-border-color($color-white); }
+
+.btn-round.btn-default {
+  @include btn-bg-color($color-default-darker);
+}

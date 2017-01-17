@@ -1,0 +1,161 @@
+/*------------------------------------
+- Step
+------------------------------------*/
+
+.step-text {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: toc1;
+  
+  > li {
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 48px;
+    font-weight: 300;
+
+    &:before {
+      content: counter(toc1, decimal-leading-zero) '.';
+      counter-increment: toc1;
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: $light-text-color;
+      font-family: $font-family-title;
+      font-size: 24px;
+      width: 42px;
+      height: 42px;
+      font-weight: bold;
+    }
+  }
+
+  > li ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 30px;
+    counter-reset: toc2;
+  }
+
+  > li li {
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 48px;
+    font-weight: 300;
+    
+
+    &:before {
+      content: counter(toc1) '-' counter(toc2) '.';
+      counter-increment: toc2;
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: $light-text-color;
+      font-family: $font-family-title;
+      font-size: 22px;
+      width: 42px;
+      height: 42px;
+      font-weight: bold;
+    }
+  }
+
+  h5 {
+    font-weight: 500;
+    font-size: 18px;
+    padding-top: 5px;
+  }
+
+  ul h5 {
+    font-size: 17px;
+    padding-top: 6px;
+  }
+
+}
+
+.step-image {
+  margin-top: 60px;
+  padding-top: 32px;
+  border-top: 1px solid $border-color-light;
+  overflow: visible;
+
+  .item > img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .carousel-caption {
+    position: static;
+    text-align: left;
+    color: $light-text-color;
+    text-shadow: none;
+  }
+
+  .carousel-indicators {
+    top: -40px;
+    left: 0;
+    margin-left: 0;
+    text-align: left;
+    width: 80%;
+    counter-reset: toc1;
+
+    &:before {
+      content: "STEPS:";
+      color: $pale-text-color;
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-right: 10px;
+    }
+
+    li {
+      border: 0;
+      text-indent: 0;
+      width: 34px;
+      height: 34px;
+      text-align: center;
+
+      &:before {
+        content: counter(toc1);
+        counter-increment: toc1;
+        font-weight: 500;
+        color: $pale-text-color;
+        transition: .1s ease;
+      }
+    }
+
+    .active,
+    li:hover {
+      &:before {
+        color: $light-text-color;
+        font-size: 18px;
+      }
+    }
+  }
+
+  .carousel-control {
+    text-shadow: none;
+    color: $light-text-color;
+    width: 34px;
+    height: 34px;
+    font-size: 26px;
+
+    &.right,
+    &.left {
+      background-image: none;
+      top: -40px;
+      bottom: auto;
+      left: auto;
+      right: 0;
+    }
+
+    &.left {
+      right: 36px;
+    }
+
+    .fa {
+      position: static;
+      color: $light-text-color;
+      font-size: 26px;
+    }
+  }
+}
+

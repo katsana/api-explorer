@@ -1,0 +1,92 @@
+/*------------------------------------
+- Carousel
+------------------------------------*/
+
+.carousel {
+
+  overflow: hidden;
+
+  .carousel-control {
+    text-shadow: none;
+    background-image: none;
+    width: 40%;
+
+    .fa {
+      position: absolute;
+      top: 50%;
+      margin-top: -32px;
+      color: #fff;
+      font-size: 64px;
+      transition: .3s ease-out;
+    }
+
+    &.right .fa {
+      right: -50px;
+    }
+
+    &.right:hover .fa {
+      right: 30px;
+    }
+
+    &.left .fa {
+      left: -50px;
+    }
+
+    &.left:hover .fa {
+      left: 30px;
+    }
+
+  }
+
+  &.color-alt .carousel-control .fa {
+    color: $gray-text-color;
+  }
+
+  &.color-alt .carousel-indicators li {
+    border-color: $gray-text-color;
+  }
+
+  &.color-alt .carousel-indicators .active {
+    background-color: $gray-text-color;
+  }
+
+  //
+  // Indicators-out
+  //
+  &.indicators-out {
+    overflow: visible;
+    padding-bottom: 50px;
+  }
+
+  &.indicators-out .carousel-indicators {
+
+    bottom: 0;
+
+    li {
+      border-color: $accent-color;
+    }
+
+    .active {
+      background-color: $accent-color;
+    }
+    
+  }
+
+}
+
+// Media queries
+@media screen and (max-width: 991px) {
+
+  .carousel .carousel-control {
+
+    &.right .fa {
+      right: 30px;
+    }
+
+    &.left .fa {
+      left: 30px;
+    }
+
+  }
+
+}

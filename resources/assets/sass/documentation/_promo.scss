@@ -1,0 +1,112 @@
+/*------------------------------------
+- Promo
+------------------------------------*/
+
+.promo {
+  text-align: center;
+  margin: 24px 0;
+  
+  &.left {
+    text-align: left;
+  }
+  
+  &.right {
+    text-align: right;
+  }
+
+  &.small-icon {
+    .fa {
+      float: left;
+      font-size: 24px;
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      text-align: left;
+      margin-right: 16px;
+      margin-top: 8px;
+    }
+
+    > h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      padding-top: 6px;
+      padding-bottom: 12px;
+      font-size: 16px;
+      border-bottom: 1px solid $border-color-light;
+      position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        width: 42px;
+        border-bottom: 1px solid $border-color;
+      }
+    }
+
+    > p {
+      //margin-left: 41px;
+    }
+  }
+  
+  > .fa,
+  > .glyphicon  {
+    font-size: 90px;
+    color: $accent-color;
+  }
+  
+  > h3 {
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  
+  > p {
+    line-height: 24px;
+    color: $light-gray-text-color;
+  }
+  
+  > .btn {
+    margin-top: 15px;
+  }
+  
+  > img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    
+    &.bordered {
+      padding: 3px;
+      border-radius: 2px;
+      border: 1px solid $border-color;
+    }
+  }
+  
+}
+
+
+// Media queries
+@media screen and (max-width: 991px) {
+
+  .promo {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $border-color-light;
+
+    h3 {
+      margin-bottom: 15px;
+    }
+  }
+
+  .row > div:last-child > .promo {
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+}

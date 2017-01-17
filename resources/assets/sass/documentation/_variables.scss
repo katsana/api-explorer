@@ -1,0 +1,98 @@
+//
+// Variables
+// --------------------------------------------------
+
+//== General
+$font-family-body: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-title: Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+//== Colors
+$accent-color:          #5cc7b2;
+$text-color:            #333;
+$light-text-color:      #555;
+$gray-text-color:       #777;
+$light-gray-text-color: #999;
+$pale-text-color:       #ccc;
+$pale-text-color-light: #d5d5d5;
+
+$border-color-darker:   #aaa;
+$border-color-dark:     #ddd;
+$border-color:          #e7e7e7;
+$border-color-light:    #f5f6f7;
+
+$bg-color:              #fcfcfc;
+$bg-color-dark:         #f5f5f5;
+$bg-color-darker:       #eee;
+
+// Contextual colors (Used by Buttons, Labels, etc.)
+$color-default:         #777777;
+$color-default-darker:  #777777;
+$color-primary:         #2196F3;
+$color-primary-darker:  #1E88E5;
+$color-success:         #4CAF50;
+$color-success-darker:  #43A047;
+$color-info:            #29B6F6;
+$color-info-darker:     #039BE5;
+$color-warning:         #FF9800;
+$color-warning-darker:  #F57C00;
+$color-danger:          #F44336;
+$color-danger-darker:   #D32F2F;
+$color-purple:          #6D5CAE;
+$color-purple-darker:   #554790;
+$color-teal:            #00BFA5;
+$color-teal-darker:     #00af97;
+$color-dark:            #424242;
+$color-dark-darker:     #000000;
+$color-white:           #ffffff;
+$color-white-darker:    #ffffff;
+
+
+// _sidebar
+$sidebar-bg-color: $bg-color-dark;
+$sidebar-active-bg-color: $bg-color-darker;
+$sidebar-link-color: #aeb2b7;
+$sidebar-active-link-color: #ffffff;
+
+$sidebar-dark-bg-color: #2a3542;
+$sidebar-dark-active-bg-color: #35404d;
+$sidebar-dark-link-color: #aeb2b7;
+$sidebar-dark-active-link-color: #ffffff;
+
+// _alerts
+$callout-border-color:    #eee;
+$callout-success-color:   #10cfbd;
+$callout-info-color:      #48b0f7;
+$callout-warning-color:   #f8d053;
+$callout-danger-color:    #f55753;
+
+// _buttons
+$btn-default-bg-color:    #f5f5f5;
+
+
+// _code
+$code-inline-color:                 #f4645f;
+$code-inline-bg-color:              #f0f2f1;
+
+$code-window-bg-color:              #ebebeb;
+$code-window-border-top-color:      #eaeae9;
+$code-window-border-bottom-color:   #dfdfde;
+$code-window-circle-red-bg:         #fc615c;
+$code-window-circle-red-border:     #fd504a;
+$code-window-circle-yellow-bg:      #fec041;
+$code-window-circle-yellow-border:  #f0b542;
+$code-window-circle-green-bg:       #33c849;
+$code-window-circle-green-border:   #1bc634;
+$code-window-line-bg-color:         #f7f7f7;
+
+// _content
+$header-border-color:     #f1f1f1;
+
+// _files
+$file-tree-folder-color:  #f4db0b;
+$file-tree-file-color:    #cedde0;
+
+// _toc
+$toc-text-color:          #888;
+
+// _views
+$view-link-color:         #45baa3;

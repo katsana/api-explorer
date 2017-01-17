@@ -1,0 +1,368 @@
+/*------------------------------------
+- Header
+------------------------------------*/
+
+.site-header {
+
+  .navbar {
+    background-color: $accent-color;
+    padding: 20px 15px;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    transition: 0.2s ease;
+  }
+
+  .navbar-brand {
+
+    display: inline-block;
+    padding-top: 0;
+    padding-bottom: 0;
+    float: none;
+
+    > img {
+      display: inline-block;
+      max-height: 36px;
+      transition: 0.2s ease;
+    }
+
+    .force-middle {
+      display: inline-block;
+      vertical-align: middle;
+      height: 100%;
+    }
+    
+  }
+
+  &.navbar-sm {
+    .navbar {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    .navbar-brand > img {
+      max-height: 24px;
+    }
+  }
+
+  &.navbar-lg {
+    .navbar {
+      padding-top: 32px;
+      padding-bottom: 32px;
+    }
+
+    .navbar-brand > img {
+      max-height: 48px;
+    }
+  }
+
+  &.sticky {
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &.navbar-fullwidth .navbar .container {
+    width: 100%;
+    margin: 0;
+  }
+
+  &.navbar-transparent {
+    padding-top: 0;
+
+    .navbar {
+      background-color: transparent;
+      box-shadow: none !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
+    }
+  }
+
+}
+
+.navbar-default .navbar-brand {
+  &,
+  &:focus,
+  &:hover {
+    color: $color-white;
+    font-size: 25px;
+    font-weight: 300;
+  }
+}
+
+
+.navbar-default .navbar-nav > {
+
+  //Normal links
+  li > a {
+    & {
+      color: rgba(255,255,255,.8);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: .2s ease;
+    }
+
+    &:focus,
+    &:hover {
+      color: $color-white;
+    }
+  }
+
+  //Selected menu
+  .active > a {
+    &,
+    &:focus,
+    &:hover {
+      color: $color-white;
+      background-color: transparent;
+      font-weight: 700;
+    }
+  }
+
+  //Drop-down menu
+  .open > a {
+    & {
+      color: $color-white;
+      background-color: transparent;
+      transition: none;
+    }
+
+    &:focus,
+    &:hover {
+      color: $gray-text-color;
+      background-color: $color-white;
+    }
+  }
+
+  //Highlighted menu
+  .hero > a {
+    & {
+      background-color: rgba(255,255,255,.1);
+      border-radius: 3px;
+      transition: 0.3s linear;
+    }
+
+    &:focus,
+    &:hover {
+      color: $color-white;
+      background-color: rgba(255,255,255,.25);
+    }
+  }
+
+}
+
+.nav .dropdown-menu {
+  & {
+    box-shadow: none;
+    border-color: $border-color;
+    border-top: none;
+  }
+
+  > li > a {
+    padding: 8px 20px;
+
+    &:focus,
+    &:hover {
+      background-color: $bg-color-dark;
+    }
+  }
+}
+
+.navbar-default .navbar-toggle {
+  margin: 0;
+  padding: 7px 11px;
+  border: none;
+  border-radius: 2px;
+  color: rgba(255,255,255,.8);
+  font-size: 20px;
+
+  &:focus,
+  &:hover {
+    color: $color-white;
+    background-color: rgba(255,255,255,.2);
+
+    .icon-bar {
+      background-color: $color-white;
+    }
+  }
+
+  &.for-sidebar {
+    float: left;
+    margin-top: 3px;
+    padding: 14px 10px;
+  }
+
+  .fa {
+    vertical-align: top;
+  }
+
+  .icon-bar {
+    background-color: rgba(255,255,255,.8);
+  }
+}
+
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: rgba(255,255,255,.1);
+}
+
+
+// Navbar light
+.navbar-default.navbar-light {
+  background-color: $color-white;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+
+  //Normal links
+  li > a {
+    & {
+      color: $gray-text-color;
+    }
+
+    &:focus,
+    &:hover {
+      color: $accent-color;
+    }
+  }
+
+  //Selected menu
+  .active > a {
+    &,
+    &:focus,
+    &:hover {
+      color: $accent-color;
+    }
+  }
+
+  //Drop-down menu
+  .open > a {
+    & {
+      color: $accent-color;
+      background-color: $bg-color!important;
+    }
+
+    &:focus,
+    &:hover {
+      color: $accent-color;
+    }
+  }
+
+  .dropdown-menu {
+    background-color: $bg-color;
+
+    a:hover {
+      color: $text-color;
+    }
+  }
+
+  //Highlighted menu
+  .hero > a {
+    & {
+      background-color: rgba($accent-color,.8);
+      color: $color-white;
+    }
+
+    &:focus,
+    &:hover {
+      color: $color-white;
+      background-color: rgba($accent-color,.99);
+    }
+  }
+
+}
+
+
+// Navbar dark
+.navbar-default.navbar-dark {
+  background-color: #292929;
+}
+
+
+
+// Media queries
+@media screen and (max-width: 991px) {
+
+  .site-header .navbar {
+    padding: 15px;
+  }
+
+  .navbar-brand {
+
+    float: left;
+
+    > img {
+      max-height: 32px;
+    }
+    
+  }
+
+}
+
+
+@media screen and (max-width: 767px) {
+
+  .site-header > .navbar {
+    padding: 2px 15px 0!important;
+  }
+
+  .navbar-default .navbar-brand {
+    font-size: 22px;
+  }
+
+  .navbar-default .navbar-nav > .open > a {
+    &:focus,
+    &:hover {
+      color: rgba(255,255,255,.9);
+      background-color: transparent;
+    }
+  }
+
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+    color: $color-white;
+    font-weight: 500;
+  }
+
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: rgba(255,255,255,.9);
+  }
+
+  .navbar-default .navbar-toggle {
+    margin-top: 3px;
+  }
+
+  .site-header .navbar-brand {
+
+    display: block;
+    text-align: center;
+
+    > img {
+      max-height: 20px!important;
+    }
+    
+  }
+
+  .site-header.navbar-transparent .navbar-nav {
+    background-color: #292929;
+  }
+
+  .navbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 99 !important;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2) !important;
+    background-color: $accent-color !important;
+  }
+
+}

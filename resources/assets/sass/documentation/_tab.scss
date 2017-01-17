@@ -1,0 +1,105 @@
+/*------------------------------------
+- Tabs
+------------------------------------*/
+
+// Reset default bootstrap style
+.tabs {
+
+  .nav-tabs > li {
+    margin-bottom: 0;
+    float: none;
+    display: inline-block;
+
+    a {
+      border: 0!important;
+      border-radius: 0;
+      color: $light-gray-text-color;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1px;
+      font-weight: 500;
+      transition: 0.3s ease;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+    
+  }
+
+  .tab-content {
+    padding: 15px;
+  }
+}
+
+// Text tab
+.tabs-text .nav-tabs > li {
+
+  &.active {
+    margin-bottom: -1px;
+    border-bottom: 1px solid $accent-color;
+
+    a {
+      color: $accent-color;
+    }
+  }
+
+}
+
+// Icon tab
+.tabs-icon .nav-tabs > li {
+
+  a {
+
+    padding: 10px 25px;
+
+    .fa,
+    .glyphicon {
+      display: block;
+      font-size: 32px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+  }
+
+  &.active {
+    margin-bottom: -1px;
+    border-bottom: 1px solid $accent-color;
+
+    a {
+      color: $accent-color;
+    }
+  }
+
+}
+
+// Button tab
+.tabs-btn .nav-tabs {
+
+  border-bottom: 0;
+
+  li {
+    float: left;
+    a {
+      background-color: #eee;
+      margin-right: 0;
+    }
+
+    &.active {
+
+      a {
+        color: $accent-color;
+      }
+    }
+  }
+}
+
+
+// Media queries
+@media screen and (max-width: 767px) {
+
+  .tabs .nav-tabs > li a {
+    font-size: 12px;
+  }
+
+}

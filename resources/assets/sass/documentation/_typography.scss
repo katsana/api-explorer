@@ -1,0 +1,275 @@
+/*------------------------------------
+- Typography
+------------------------------------*/
+body {
+  font-family: $font-family-body;
+  color: $text-color;
+}
+
+a,
+a:focus,
+a:hover {
+  color: $accent-color;
+}
+
+a:focus {
+  text-decoration: none;
+}
+
+p,
+ul {
+  font-weight: 400;
+}
+
+hr {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+blockquote {
+  font-family: georgia, Raleway, sans-serif;
+  font-style: italic;
+  font-size: 20px;
+  color: $gray-text-color;
+}
+
+h1 {
+  font-weight: 200;
+  font-size: 52px;
+  line-height: 52px;
+  margin-bottom: 45px;
+}
+
+h2 {
+  font-size: 36px;
+  line-height: 33px;
+  margin-bottom: 35px;
+  margin-top: 65px;
+  font-weight: 300;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $border-color-dark;
+
+  a {
+    position: relative;
+    line-height: 44px;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -20px;
+      height: 1px;
+      background-color: $border-color-darker;
+    }
+  }
+}
+
+h3 {
+  font-size: 30px;
+  line-height: 30px;
+  margin-bottom: 28px;
+  margin-top: 45px;
+  font-weight: 300;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 25px;
+}
+
+h5 {
+  font-size: 21px;
+  font-weight: 400;
+}
+
+h6 {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+
+  font-family: $font-family-title;
+  
+  a,
+  a:focus,
+  a:hover {
+    color: $color-dark-darker;
+    text-decoration: none;
+  }
+
+  small {
+    font-weight: 300;
+  }
+}
+
+h1 small {
+  font-weight: 100;
+}
+
+h1, h2, h3 {
+  a:before {
+    margin-left: -30px;
+    margin-right: 8px;
+    font-family: 'Glyphicons Halflings';
+    font-size: 22px;
+    color: $accent-color;
+    opacity: .3;
+    content: "\e144";
+    transition: .3s ease;
+  }
+}
+
+h3 a:before {
+  opacity: 0;
+}
+
+h1, h2, h3 {
+  &:hover a:before {
+    opacity: .6;
+  }
+}
+
+/*
+--Depricated
+h2[id] {
+  position: relative;
+
+  .release-date {
+    position: absolute;
+    bottom: -26px;
+    right: 0;
+    background-color: $border-color-darker;
+    color: $color-white;
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+}
+*/
+
+.release-date {
+  margin-left: 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: $pale-text-color-light;
+
+  &:before {
+    content: "\f133";
+    font-family: FontAwesome;
+    margin-right: 8px;
+  }
+}
+
+// Place holder
+::-webkit-input-placeholder {
+  font-weight: 300;
+}
+
+::-moz-placeholder {
+   color: red;  
+}
+
+:-ms-input-placeholder {  
+   color: red;  
+}
+
+//Contextual text color
+.text-primary { color: $color-primary; }
+.text-success { color: $color-success; }
+.text-info    { color: $color-info; }
+.text-warning { color: $color-warning; }
+.text-danger  { color: $color-danger; }
+.text-purple  { color: $color-purple; }
+.text-teal    { color: $color-teal; }
+.text-gray    { color: $pale-text-color; }
+.text-dark    { color: $color-dark; }
+.text-white   { color: $color-white; }
+
+// Media queries
+@media screen and (max-width: 991px) {
+
+  h1 {
+    font-size: 45px;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    font-size: 32px;
+    margin-bottom: 28px;
+    margin-top: 55px;
+
+    a::after {
+      bottom: -21px;
+    }
+  }
+
+  h3 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    margin-top: 38px;
+  }
+
+  h4 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  h5 {
+    font-size: 20px;
+    line-height: 25px;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+
+  section > h2[id] > a {
+    margin-left: 30px;
+  }
+
+}
+
+
+@media screen and (max-width: 460px) {
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 25px;
+  }
+
+  h2 {
+    font-size: 28px;
+    margin-top: 40px;
+
+    a::after {
+      display: none;
+    }
+  }
+
+  h3 {
+    font-size: 25px;
+    margin-bottom: 23px;
+    margin-top: 30px;
+  }
+
+  h4 {
+    font-size: 22px;
+    line-height: 26px;
+    font-weight: 300;
+  }
+
+  h5 {
+    font-size: 19px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+
+  h6 {
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: 500;
+  }
+
+}

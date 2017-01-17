@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Routing\Router;
+use Katsana\Sdk\Exceptions\UnauthorizedHttpException;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,19 +14,26 @@ use Illuminate\Routing\Router;
 |
 */
 
-$router->get('start', function () {
-    $user = Socialite::driver('katsana')->userFromToken(Session::get('token'));
+$router->group(['prefix' => 'v1'], function (Router $router) {
+    $router->get('start', function () {
+        try {
+            $user = Socialite::driver('katsana')->userFromToken(Session::get('token'));
+        } catch (UnauthorizedHttpException $e) {
+            Session::forget('token');
+            return redirect('/');
+        }
 
-    dd($user->user);
-})->middleware('auth');
+        dd($user->user);
+    })->middleware('auth');
 
-$router->group(['middleware' => 'guest'], function (Router $router) {
-    $router->get('/', function () {
-        return view('welcome');
-    });
+    $router->group(['middleware' => 'guest'], function (Router $router) {
+        $router->get('/', function () {
+            return view('welcome');
+        });
 
-    $router->group(['prefix' => 'social'], function (Router $router) {
-        $router->get('connect', 'Auth\SocialController@redirectToProvider');
-        $router->get('callback', 'Auth\SocialController@handleProviderCallback');
+        $router->group(['prefix' => 'social'], function (Router $router) {
+            $router->get('connect', 'Auth\SocialController@redirectToProvider');
+            $router->get('callback', 'Auth\SocialController@handleProviderCallback');
+        });
     });
 });

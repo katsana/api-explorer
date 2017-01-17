@@ -1,0 +1,617 @@
+/*------------------------------------
+- Sidebar
+------------------------------------*/
+
+.sidebar {
+  padding: 50px 20px 20px;
+}
+
+.sidenav {
+
+  //overflow-y: auto;
+  min-width: 180px;
+
+
+  &.nav > li > a {
+    padding: 0;
+  }
+
+  &.nav > li > a:focus,
+  &.nav > li > a:hover {
+    background-color: transparent;
+  }
+
+  a:focus {
+    color: $gray-text-color;
+  }
+
+  &,
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  &.dropable ul {
+    display: none;
+  }
+
+  &.dropable ul.open {
+    display: block;
+  }
+
+  &.dropable a.active + ul,
+  &.dropable .active > ul {
+    display: block;
+  }
+
+  ul {
+    padding-left: 24px;
+  }
+
+  a {
+    display: block;
+    line-height: 30px;
+    color: $gray-text-color;
+    transition: .3s ease;
+    
+    &.active,
+    &:hover {
+      text-decoration: none;
+      opacity: 1;
+      color: $accent-color;
+    }
+
+    &.active {
+      font-weight: 400;
+    }
+  }
+
+  > li > a {
+    font-size: 16px;
+    line-height: 36px;
+    
+    &.active,
+    &:hover {
+      color: $accent-color;
+    }
+  }
+
+  > li {
+    position: relative;
+    font-size: 16px;
+    line-height: 36px;
+    color: $gray-text-color;
+
+    > ul {
+      padding-bottom: 20px;
+
+      &.nav > li > a {
+        padding: 0;
+      }
+
+      &.nav > li > a:focus,
+      &.nav > li > a:hover {
+        background-color: transparent;
+      }
+
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 36px;
+        bottom: 20px;
+        left: 0;
+        border-left: 1px solid $pale-text-color;
+      }
+      
+      li.active a,
+      a.active {
+        position: relative;
+        
+        &:before {
+          content: ' ';
+          position: absolute;
+          left: -26px;
+          top: 12px;
+          width: 6px;
+          height: 6px;
+          border-radius: 100%;
+          background-color: $accent-color;
+        }
+      }
+    }
+
+    li {
+      font-size: 14px;
+      line-height: 30px;
+    }
+  }
+
+  // Third level
+  //
+  ul li.active ul {
+    a:before {
+      display: none !important;
+    }
+  }
+
+  ul ul {
+    display: block !important;
+
+    li.active a:before,
+    a.active:before {
+      display: none !important;
+    }
+  }
+  
+  .fa,
+  .glyphicon {
+    margin-right: 4px;
+  }
+
+  // Scrollspy
+  li.active > a {
+    color: $accent-color;
+  }
+
+
+}
+
+//
+// Variations
+//
+// Line beside active link
+.sidebar-line .sidenav {
+
+  > li > ul:before {
+    display: none;
+  }
+
+  li.active > a,
+  a.active {
+    position: relative;
+
+    &:before {
+      content: ' ';
+      position: absolute;
+      left: -10px;
+      top: 5px;
+      bottom: 5px;
+      width: 1px;
+      height: 20px;
+      border-radius: 0;
+      background-color: $accent-color;
+    }
+  }
+
+  > li.active > a:before,
+  > li > a.active:before {
+    height: 25px;
+    width: 2px;
+  }
+
+}
+
+// Icon
+.sidebar-icon .sidenav {
+
+  > li > ul:before,
+  li.active a:before,
+  a.active:before {
+    display: none;
+  }
+
+}
+
+
+//
+// Boxed sidebar variations
+//
+
+// Default
+.sidebar-boxed {
+  background-color: $sidebar-bg-color;
+  padding-left: 0;
+  padding-right: 0;
+  width: 280px;
+  padding-top: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+
+  ~ header,
+  ~ main,
+  ~ footer {
+    padding-left: 280px;
+  }
+
+  ~ header.navbar-transparent .navbar {
+    right: 0;
+    left: 280px;
+  }
+
+  ~ header .banner,
+  ~ footer .row {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  ~ main .main-content {
+    padding-left: 75px;
+    padding-right: 75px;
+  }
+
+  &.sidebar-right {
+    left: auto;
+    right: 0;
+
+    ~ header,
+    ~ main,
+    ~ footer {
+      padding-left: 0;
+      padding-right: 280px;
+    }
+
+    ~ header.navbar-transparent .navbar {
+      right: 280px;
+      left: 0;
+    }
+
+  }
+
+  .sidebar-brand {
+    margin-top: -50px;
+    margin-bottom: 50px;
+    display: block;
+    text-align: center;
+  }
+
+}
+
+.sidebar-boxed .sidenav {
+
+  > li > ul:before,
+  a.active:before {
+    display: none;
+  }
+
+  a {
+    padding: 2px 20px !important;
+
+    &.open,
+    &.open + ul {
+      background-color: $sidebar-active-bg-color;
+    }
+  }
+
+  > li {
+    margin-bottom: 4px;
+    position: relative;
+
+    > a {
+      padding-top: 6px !important;
+      padding-bottom: 6px !important;
+      color: $gray-text-color;
+
+      &:hover {
+        background-color: $sidebar-active-bg-color;
+      }
+
+      &:hover,
+      &.open {
+        color: $accent-color;
+      }
+
+      &.has-child:after {
+        content: "\f105";
+        font-family: FontAwesome;
+        position: absolute;
+        right: 20px;
+        top: 4px;
+      }
+    }
+
+    > a.open:after {
+      content: "\f107";
+    }
+
+  }
+
+  > li.active > a.has-child:after {
+    content: "\f107";
+  }
+
+  ul {
+    padding-left: 0;
+
+    ul {
+      padding-left: 24px;
+    }
+
+    a {
+      padding-left: 44px !important;
+    }
+  }
+
+}
+
+// Dark skin
+.sidebar-boxed.sidebar-dark {
+  background-color: $sidebar-dark-bg-color;
+
+  .sidenav a {
+    color: $sidebar-dark-link-color;
+
+    &:hover,
+    &.active {
+      color: $sidebar-dark-active-link-color;
+    }
+
+    &.open,
+    &.open + ul {
+      background-color: $sidebar-dark-active-bg-color;
+    }
+  }
+
+  .sidenav > li > a {
+    &:hover {
+      background-color: $sidebar-dark-active-bg-color;
+    }
+
+    &:hover,
+    &.open {
+      color: $sidebar-dark-active-link-color !important;
+    }
+  }
+
+  .sidenav li.active > a {
+    color: $sidebar-dark-active-link-color;
+  }
+
+}
+
+
+// Media queries
+@media screen and (min-width: 1170px) {
+
+  .sidebar-boxed {
+
+    ~ header .banner,
+    ~ footer .row {
+      padding-left: 120px;
+      padding-right: 120px;
+    }
+
+    ~ main .main-content {
+      padding-left: 135px;
+      padding-right: 135px;
+    }
+
+  }
+
+
+}
+
+@media screen and (max-width: 991px) {
+
+  .sidebar-boxed {
+    width: 240px;
+
+    ~ header,
+    ~ main,
+    ~ footer {
+      padding-left: 240px;
+    }
+
+    ~ header.navbar-transparent .navbar {
+      right: 0;
+      left: 240px;
+    }
+
+    ~ header .banner,
+    ~ footer .row {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    ~ main .main-content {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    &.sidebar-right {
+      ~ header,
+      ~ main,
+      ~ footer {
+        padding-left: 0;
+        padding-right: 240px;
+      }
+
+      ~ header.navbar-transparent .navbar {
+        right: 240px;
+        left: 0;
+      }
+
+    }
+
+    .sidenav ul a {
+      padding-left: 38px;
+    }
+
+  }
+
+
+}
+
+@media screen and (max-width: 767px) {
+
+  /* off-canvas for sidenav */
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  body {
+    padding-top: 50px;
+  }
+
+  .site-header,
+  .site-header .navbar {
+    transition: left .25s ease-out;
+  }
+
+  .site-header {
+    position: relative;
+    left: 0;
+  }
+
+  .site-footer {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  body > main {
+    position: relative;
+    left: 0;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    transition: left .25s ease-out;
+  }
+
+  .sidebar-boxed {
+    ~ header,
+    ~ main,
+    ~ footer {
+      padding-left: 0;
+    }
+
+    ~ header.navbar-transparent .navbar {
+      right: 0;
+      left: 0;
+    }
+
+    &.sidebar-right {
+      ~ header,
+      ~ main,
+      ~ footer {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      ~ header.navbar-transparent .navbar {
+        right: 0;
+        left: 0;
+      }
+    }
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 80% !important;
+    height: 100%;
+    left: -80% !important;
+    padding-left: 25px;
+    padding-top: 20px !important;
+    overflow-y: auto;
+    background-color: $bg-color !important;
+    transition: left .25s ease-out;
+
+    &.sidebar-boxed {
+
+      .has-child:after {
+        display: none;
+      }
+
+      .sidenav a {
+        padding-left: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+
+      .sidenav ul a {
+        padding-left: 18px !important;
+      }
+
+      .sidenav a.open,
+      .sidenav a.open + ul {
+        background-color: transparent;
+      }
+
+    }
+
+    .sidebar-brand {
+      display: none;
+    }
+
+  }
+
+  .sidenav.dropable ul {
+    display: block;
+  }
+
+  .open-sidebar {
+    overflow: hidden;
+
+    .site-header {
+      left: 80%;
+
+      .navbar {
+        left: 80% !important;
+        right: -80% !important;
+      }
+    }
+
+    > main {
+      left: 80%;
+    }
+
+    .sidebar {
+      left: 0 !important;
+    }
+
+    .site-footer {
+      display: none;
+    }
+
+    .site-header.navbar-transparent .navbar {
+      position: fixed;
+    }
+  }
+
+  .sidenav.sticky {
+    //position: static!important;
+  }
+  
+  // Remove line and dots from left side of UL
+  .sidenav {
+    
+    > li {
+      position: static;
+
+      &.active a::before {
+        display: none;
+      }
+  
+      > ul {
+        
+        &:before {
+          //display: none;
+        }
+        
+        a.active {
+          position: static;
+        }
+      }
+    }
+    
+  }
+
+}

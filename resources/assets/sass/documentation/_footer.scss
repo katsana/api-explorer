@@ -1,0 +1,82 @@
+/*------------------------------------
+- Footer
+------------------------------------*/
+
+.site-footer {
+  position: relative;
+  background-color: $bg-color-dark;
+  color: $gray-text-color;
+  padding: 30px 15px;
+
+  div > p:last-child {
+    margin-bottom: 0;
+  }
+
+  .container,
+  .container-fluid {
+    position: relative;
+  }
+
+  #scroll-up {
+    position: absolute;
+    top: -47px;
+    right: 0;
+    color: $pale-text-color;
+    background-color: $bg-color-dark;
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 21px;
+    -webkit-transition: .2s ease;
+            transition: .2s ease;
+
+    &:hover {
+      color: $light-gray-text-color;
+    }
+
+    > .fa {
+      vertical-align: top;
+    }
+  }
+}
+
+.footer-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+
+  li {
+    display: inline-block;
+    padding: 0 8px;
+  }
+
+  a {
+    color: rgba(125,125,125,.7);
+    font-weight: 500;
+    -webkit-transition: .2s ease;
+            transition: .2s ease;
+
+    &:hover,
+    &.active {
+      color: rgb(125,125,125);
+      text-decoration: none;
+    }
+  }
+}
+
+// Media queries
+@media screen and (max-width: 767px) {
+
+  .site-footer {
+    text-align: center;
+  }
+
+  .footer-menu {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+}

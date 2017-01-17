@@ -5,6 +5,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0",
+        "erusev/parsedown-extra": "^0.7.1",
         "katsana/katsana-sdk-laravel": "~0.1",
         "katsana/socialite": "~0.2",
         "laravel/framework": "5.3.*",

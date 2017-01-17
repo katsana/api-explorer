@@ -1,0 +1,150 @@
+/*------------------------------------
+- Jumbotron
+------------------------------------*/
+
+.jumbotron {
+  background-size: cover;
+  background-position: center;
+  border-radius: 0!important;
+  background-color: $bg-color-dark;
+  
+  &.overlay-black,
+  &.overlay-white {
+    position: relative;
+    z-index: 0;
+    
+    &:before {
+      position: absolute;
+      content: ' ';
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      background-color: rgba(0, 0, 0, .4);
+    }
+  }
+  
+  &.overlay-white:before {
+    background-color: rgba(255, 255, 255, .7);
+  }
+
+  p {
+    font-weight: 300;
+    line-height: 30px;
+  }
+  
+  h1 {
+    line-height: 70px;
+  }
+  
+  h2 {
+    border-bottom: 0;
+    margin-bottom: 16px;
+    line-height: 50px;
+  }
+  
+  .btn {
+    margin-top: 15px;
+  }
+  
+}
+
+// Colors
+.jumbotron-primary { @include jumbotron-variation($color-primary); }
+.jumbotron-success { @include jumbotron-variation($color-success); }
+.jumbotron-info    { @include jumbotron-variation($color-info); }
+.jumbotron-warning { @include jumbotron-variation($color-warning); }
+.jumbotron-danger  { @include jumbotron-variation($color-danger); }
+.jumbotron-purple  { @include jumbotron-variation($color-purple); }
+.jumbotron-teal    { @include jumbotron-variation($color-teal); }
+.jumbotron-dark    { @include jumbotron-variation($color-dark); }
+.jumbotron-white   { @include jumbotron-variation($color-white, $text-color); }
+
+// Sizes
+.jumbotron {
+
+  &.jumbotron-sm {
+    padding: 48px 24px 24px;
+  
+    h1, h2, h3, h4, h5 {
+      margin-top: 0;
+    }
+  
+    p {
+      font-size: 19px;
+      line-height: 28px;
+    }
+  }
+
+  &.jumbotron-lg {
+    padding: 100px 36px;
+
+    p {
+      font-size: 24px;
+      line-height: 38px;
+    }
+  }
+  
+  &.jumbotron-xl {
+    padding: 220px 50px;
+
+    p {
+      font-size: 28px;
+      line-height: 42px;
+    }
+  }
+
+}
+
+
+// Media queries
+@media screen and (max-width: 991px) {
+
+  .jumbotron {
+  
+    h1 {
+      line-height: 40px;
+    }
+    
+    h2 {
+      line-height: 35px;
+    }
+  
+    &.jumbotron-lg {
+      padding: 90px 24px;
+      
+      p {
+        font-size: 18px;
+        line-height: 26px;
+      }
+    }
+    
+    &.jumbotron-xl {
+      padding: 180px 32px;
+      
+      p {
+        font-size: 18px;
+        line-height: 26px;
+      }
+    }
+  
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+
+  .jumbotron {
+  
+    &.jumbotron-lg {
+      padding: 70px 16px;
+    }
+    
+    &.jumbotron-xl {
+      padding: 100px 20px;
+    }
+  
+  }
+
+}

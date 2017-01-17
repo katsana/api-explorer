@@ -1,0 +1,66 @@
+// Mixins
+// --------------------------------------------------
+
+// Common
+
+
+// _alerts
+@mixin callout-variant($color) {
+  border-left-color: $color;
+
+  h4,
+  a {
+    color: $color;
+  }
+}
+
+
+// _buttons
+@mixin remove-outline {
+  &.active.focus,
+  &.active:focus,
+  &.focus,
+  &:active.focus,
+  &:active:focus,
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin btn-bg-color($color) {
+  &.active,
+  &.focus,
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: $color;
+  }
+}
+
+@mixin btn-color($color, $important: false) {
+  &.active,
+  &.focus,
+  &:active,
+  &:focus,
+  &:hover {
+    @if $important {color: $color!important;}
+    @else {color: $color;}
+  }
+}
+
+@mixin btn-text-and-border-color($color) {
+  color: $color;
+  border-color: $color;
+}
+
+// _jumbotron
+@mixin jumbotron-variation($bg-color, $color: $color-white) {
+  background-color: $bg-color;
+  color: $color;
+}
+
+// _tables
+@mixin changelog-type($name, $bg-color) {
+  content: $name;
+  background-color: $bg-color;
+}

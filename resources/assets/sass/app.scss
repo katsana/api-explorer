@@ -1,9 +1,77 @@
+/*
+ * theDocs v1.2.0 (http://shamsoft.net/thedocs)
+ * Copyright 2015 ShaMSofT
+ * Licensed under the Themeforest Standard Licenses
+
+ ... Table of content ...
+ ------------------------
+ 01. Content
+ 02. Header
+ 03. Footer
+ 04. Sidebar
+ 05. Typography
+ 06. Labels
+ 07. Alerts
+ 08. Buttons
+ 09. Tables
+ 10. Table of contents
+ 11. FAQ
+ 12. Tab
+ 13. Code
+ 14. Steps
+ 15. Views
+ 16. Color palette
+ 17. Promo
+ 18. Files
+ 19. Media
+ 20. Banner
+ 21. Carousel
+ 22. Jumbotron
+ 23. Breadcrumbs
+ 24. Pagination
+ 25. Requirements
+ 26. Blog
+ ------------------------
+ */
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url("https://fonts.googleapis.com/css?family=Raleway:100,300,400,500%7CLato:300,400");
 
-// Variables
-@import "variables";
+// Core variables and mixins
+@import "documentation/variables";
+@import "documentation/mixins";
 
-// Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Core CSS
+@import "documentation/content";
+@import "documentation/header";
+@import "documentation/footer";
+@import "documentation/sidebar";
+@import "documentation/typography";
+@import "documentation/labels";
+@import "documentation/alerts";
+@import "documentation/buttons";
+@import "documentation/tables";
+@import "documentation/form";
+
+// Components
+@import "documentation/toc";
+@import "documentation/faq";
+@import "documentation/tab";
+@import "documentation/code";
+@import "documentation/views";
+@import "documentation/color";
+@import "documentation/promo";
+@import "documentation/files";
+@import "documentation/media";
+@import "documentation/banner";
+@import "documentation/carousel";
+@import "documentation/step";
+@import "documentation/jumbotron";
+@import "documentation/breadcrumb";
+@import "documentation/pagination";
+@import "documentation/requirements";
+@import "documentation/blog";
+
+@import "documentation/skins/skin-pink";

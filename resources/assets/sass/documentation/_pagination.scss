@@ -1,0 +1,75 @@
+/*------------------------------------
+- Pagination
+------------------------------------*/
+
+.pagination {
+
+  li > a,
+  li > span {
+    border: none;
+    margin: 0 4px;
+    color: $gray-text-color;
+    transition: .3s ease-out;
+  }
+
+  .previous,
+  .next {
+    font-size: 20px;
+    line-height: 21px;
+  }
+
+  > li > a:focus,
+  > li > a:hover,
+  > li > span:focus,
+  > li > span:hover {
+    background-color: transparent;
+    color: $accent-color;
+  }
+
+  > .active > a,
+  > .active > a:focus,
+  > .active > a:hover,
+  > .active > span,
+  > .active > span:focus,
+  > .active > span:hover {
+    background-color: $accent-color;
+    border-radius: 2px;
+  }
+
+}
+
+.pager {
+
+  li > a {
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 0;
+    color: $gray-text-color;
+    transition: .3s ease-out;
+
+    &:hover {
+      background-color: transparent;
+      color: $accent-color;
+    }
+  }
+
+  .next > a::after {
+    content: "\f105";
+    font-family: FontAwesome;
+    font-size: 20px;
+    margin-left: 8px;
+    vertical-align: bottom;
+  }
+
+  .previous > a::before {
+    content: "\f104";
+    font-family: FontAwesome;
+    font-size: 20px;
+    margin-right: 8px;
+    vertical-align: bottom;
+  }
+
+}

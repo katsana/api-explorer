@@ -1,0 +1,49 @@
+/*------------------------------------
+- Alerts
+------------------------------------*/
+
+.alert {
+  border-radius: 2px;
+}
+
+// Callouts
+// -------------------------
+.callout {
+  padding: 12px 20px;
+  margin: 20px 0;
+  border: 1px solid $callout-border-color;
+  border-left-width: 3px;
+  border-radius: 3px;
+
+  h4 {
+    font-size: 20px;
+  }
+}
+
+.callout-success {
+  @include callout-variant($callout-success-color);
+}
+
+.callout-info {
+  @include callout-variant($callout-info-color);
+}
+
+.callout-warning {
+  @include callout-variant($callout-warning-color);
+}
+
+.callout-danger {
+  @include callout-variant($callout-danger-color);
+}
+
+// Media queries
+@media screen and (max-width: 480px) {
+
+  .callout {
+    padding: 10px;
+  }
+
+}
+
+
+
