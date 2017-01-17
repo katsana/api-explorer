@@ -1,8 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "prod": "gulp --production",
-    "dev": "gulp watch"
+    "build": "gulp --production"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.7",
@@ -14,8 +13,5 @@
     "lodash": "^4.16.2",
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3"
-  },
-  "scripts": {
-    "build": "gulp --production"
   }
 }

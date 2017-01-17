@@ -63,6 +63,7 @@ class DocumentationController extends Controller
     {
         return view('documentation', [
             'toc'      => $toc,
+            'user'     => null,
             'document' => $document,
             'version'  => $version,
             'html'     => [

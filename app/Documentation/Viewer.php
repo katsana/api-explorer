@@ -105,6 +105,7 @@ class Viewer
     {
         $replacement = [
             'doc-url' => url($version),
+            'asset-url' => asset(null),
         ];
 
         return Str::replace($content, $replacement);

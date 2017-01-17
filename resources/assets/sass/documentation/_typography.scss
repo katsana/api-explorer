@@ -60,7 +60,7 @@ h2 {
       right: 0;
       bottom: -20px;
       height: 1px;
-      background-color: $border-color-darker;
+      //background-color: $border-color-darker;
     }
   }
 }
@@ -91,7 +91,7 @@ h6 {
 h1, h2, h3, h4, h5, h6 {
 
   font-family: $font-family-title;
-  
+
   a,
   a:focus,
   a:hover {
@@ -168,11 +168,11 @@ h2[id] {
 }
 
 ::-moz-placeholder {
-   color: red;  
+   color: red;
 }
 
-:-ms-input-placeholder {  
-   color: red;  
+:-ms-input-placeholder {
+   color: red;
 }
 
 //Contextual text color

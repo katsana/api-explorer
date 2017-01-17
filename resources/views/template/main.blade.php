@@ -10,7 +10,7 @@
     <title>KATSANA&trade; API</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 
     <!-- Favicons -->
   </head>
@@ -36,7 +36,7 @@
             </button>
 
             <a class="navbar-brand" href="{{ url('/') }}">
-              <img src="{{ asset('images/katsana.png') }}" alt="logo">
+              <img src="{{ asset('images/katsana.png') }}" alt="logo"> API Documentation
             </a>
           </div>
           <!-- END Toggle buttons and brand -->
@@ -44,7 +44,6 @@
           <!-- Top navbar -->
           <div id="navbar" class="navbar-collapse collapse" aria-expanded="true" role="banner">
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="/">Documentation</a></li>
             </ul>
           </div>
           <!-- END Top navbar -->
@@ -92,7 +91,7 @@
     <!-- END Footer -->
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/all.js') }}"></script>
 
   </body>
 </html>
