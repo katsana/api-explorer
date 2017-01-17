@@ -39,6 +39,7 @@ title: Table of Content
       <li><a href="{doc-url}/vehicles#vehicle-location">Vehicle Location</a></li>
     </ul>
   </li>
+  <li><a href="{doc-url}/profile">User Profile</a></li>
   <li><a href="#">Sharing</a></li>
   <li class="open has-child">
     <a href="{doc-url}/vehicles/travels">Travels</a>
