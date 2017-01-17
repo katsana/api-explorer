@@ -5,7 +5,7 @@ title: User Profile
 
 Developer should be able to view and update own profile using our API.
 
-## Own Profile {#own}
+## Show Profile {#show}
 
 ### API Endpoint
 
@@ -53,7 +53,7 @@ curl --request GET \
 }
 ```
 
-## Update Profile
+## Update Profile {#update}
 
 ### API Endpoint
 
@@ -110,5 +110,43 @@ curl --request PATCH \
     "timezone": "Asia/Kuala_Lumpur",
     "created_at": "2016-09-06 21:23:53",
     "updated_at": "2016-12-18 12:10:20"
+}
+```
+
+## Upload Avatar {#avatar}
+
+### API Endpoint
+
+    POST /profile/avatar
+
+### Parameters
+
+| Key      | Type     | Required | Description
+|:---------|:---------|:---------|:---------------
+| `file`   | `file`   | Yes      | Picture file
+
+### Headers
+
+| Type          | Value                             | Required
+|:--------------|:----------------------------------|:---------
+| Accept        | `application/vnd.KATSANA.v1+json` | Yes
+| Authorization | `Bearer {{access-token}}`         | Yes
+
+### Request
+
+```bash
+curl --request POST \
+    --url https://api.katsana.com/profile/avatar \
+    --header 'accept: application/vnd.KATSANA.v1+json' \
+    --header 'authorization: Bearer {{access-token}}'
+```
+
+### Response
+
+```json
+{
+    "url": "https://carbon.katsana.com/pictures/user-5/0153cf08-31e2-11e6-99b7-08002777c33d.jpg",
+    "thumb": "https://carbon.katsana.com/pictures/user-5/0153cf08-31e2-11e6-99b7-08002777c33d.thumb.jpg",
+    "marker": "https://carbon.katsana.com/pictures/user-5/0153cf08-31e2-11e6-99b7-08002777c33d.marker.jpg"
 }
 ```
