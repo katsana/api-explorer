@@ -8,7 +8,7 @@ title: Table of Content
     <a href="{doc-url}/index#top">Getting Started</a>
     <ul>
       <li><a href="{doc-url}/index#data-format">Data Format</a></li>
-      <li><a href="{doc-url}/index#api-information">API Information</a></li>
     </ul>
   </li>
+  <li><a href="{doc-url}/information">API Information</a></li>
 </ul>
