@@ -38,6 +38,41 @@ body[data-spy] {
       padding-bottom: 0;
     }
   }
+
+  table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+
+    > thead,
+    > tbody,
+    > tfoot {
+      > tr {
+        > th,
+        > td {
+          padding: 8px;
+          line-height: 1.42857143;
+          vertical-align: top;
+          border-top: 1px solid $border-color;
+        }
+      }
+    }
+
+    > thead > tr > th {
+      vertical-align: bottom;
+      border-bottom: 2px solid $border-color;
+      font-weight: 600;
+    }
+
+    > tbody > tr:nth-of-type(odd) {
+      background-color: $bg-color;
+    }
+
+    > tbody > tr:hover {
+      background-color: $bg-color-dark;
+    }
+  }
 }
 
 .sidebar + .main-content {

@@ -3,20 +3,17 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class WithValidAccessToken
 {
     /**
      * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
-        if (! Session::has('token')) {
+        if (! $request->session()->has('token')) {
             return redirect('/');
         }
 

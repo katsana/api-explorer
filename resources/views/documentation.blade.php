@@ -10,7 +10,7 @@
 
 <script>
 @unless(is_null($user))
-  app.$set('user', $user)
+  app.$set('user', {!! json_encode($user) !!})
 @endunless
 </script>
 @stop

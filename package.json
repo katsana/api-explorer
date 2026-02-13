@@ -1,17 +1,16 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "gulp --production"
-  },
-  "devDependencies": {
-    "bootstrap-sass": "^3.3.7",
-    "gulp": "^3.9.1",
-    "jquery": "^3.1.0",
-    "laravel-elixir": "^6.0.0-9",
-    "laravel-elixir-vue-2": "^0.2.0",
-    "laravel-elixir-webpack-official": "^1.0.2",
-    "lodash": "^4.16.2",
-    "vue": "^2.0.1",
-    "vue-resource": "^1.0.3"
-  }
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "bootstrap-sass": "^3.4.3",
+        "jquery": "^3.7.0",
+        "laravel-vite-plugin": "^0.8.0",
+        "lodash": "^4.17.21",
+        "sass": "^1.56.0",
+        "vite": "^4.0.0"
+    }
 }

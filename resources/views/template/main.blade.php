@@ -4,13 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
     <meta name="keywords" content="">
 
     <title>KATSANA&trade; API</title>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+    <!-- Vendor Styles -->
+    <link href="{{ asset('vendors/prism/prism.css') }}" rel="stylesheet">
+
+    <!-- Vite Styles -->
+    @vite(['resources/assets/sass/app.scss'])
 
     <!-- Favicons -->
   </head>
@@ -90,8 +94,10 @@
     </footer>
     <!-- END Footer -->
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/all.js') }}"></script>
+    <!-- Vendor Scripts -->
+    <script src="{{ asset('vendors/clipboard.js/clipboard.js') }}"></script>
+    <script src="{{ asset('vendors/prism/prism.js') }}"></script>
+    <script src="{{ asset('js/site.js') }}"></script>
 
   </body>
 </html>

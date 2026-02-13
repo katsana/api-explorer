@@ -1,21 +1,25 @@
 <?php
 
-use Illuminate\Routing\Router;
+use App\Http\Controllers\Auth\SocialController;
+use App\Http\Controllers\DocumentationController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use Katsana\Sdk\Exceptions\UnauthorizedHttpException;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group.
 |
 */
 
-$router->group(['prefix' => '{version?}'], function (Router $router) {
-    $router->get('start', function () {
+Route::prefix('{version?}')->group(function () {
+    Route::get('start', function () {
         try {
             $user = Socialite::driver('katsana')->userFromToken(Session::get('token'));
         } catch (UnauthorizedHttpException $e) {
@@ -26,13 +30,11 @@ $router->group(['prefix' => '{version?}'], function (Router $router) {
         dd($user->user);
     })->middleware('auth');
 
-    $router->get('{filename}', 'DocumentationController@show')->where('filename', '(.+)?');;
-    $router->get('/', 'DocumentationController@index');
+    Route::get('{filename}', [DocumentationController::class, 'show'])->where('filename', '(.+)?');
+    Route::get('/', [DocumentationController::class, 'index']);
 
-    $router->group(['middleware' => 'guest'], function (Router $router) {
-        $router->group(['prefix' => 'social'], function (Router $router) {
-            $router->get('connect', 'Auth\SocialController@redirectToProvider');
-            $router->get('callback', 'Auth\SocialController@handleProviderCallback');
-        });
+    Route::middleware('guest')->prefix('social')->group(function () {
+        Route::get('connect', [SocialController::class, 'redirectToProvider']);
+        Route::get('callback', [SocialController::class, 'handleProviderCallback']);
     });
 });

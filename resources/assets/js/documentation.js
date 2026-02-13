@@ -9,10 +9,21 @@ $(function() {
     return false;
   });
 
-  // Smooth scroll for ToC
-  $('.toc a, .sidenav.nav a').click(function(){
-    $('html, body').animate({scrollTop: $($.attr(this, 'href')).offset().top - 80}, 500);
-    return false;
+  // Smooth scroll for ToC (hash links only)
+  $('.toc a, .sidenav.nav a').on('click', function(e){
+    var href = $(this).attr('href');
+
+    if (!href || href.charAt(0) !== '#') {
+      return;
+    }
+
+    var $target = $(href);
+    if (!$target.length) {
+      return;
+    }
+
+    e.preventDefault();
+    $('html, body').animate({scrollTop: $target.offset().top - 80}, 500);
   });
 
   // Smoothscroll to anchor in page load
@@ -213,8 +224,10 @@ $(function() {
     e.stopPropagation();
   });
 
-  //Equal height for grid view
-  $('.grid-view > li, .categorized-view > li, .promo.small-icon').matchHeight();
+  // Equal height for grid view (optional plugin).
+  if ($.fn.matchHeight) {
+    $('.grid-view > li, .categorized-view > li, .promo.small-icon').matchHeight();
+  }
 
   //
   // Code viewers

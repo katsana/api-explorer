@@ -2,41 +2,31 @@
 
 namespace App\Documentation;
 
-use Kurenai\DocumentParser;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Cache\Factory as Cache;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Filesystem\Filesystem;
+use Kurenai\DocumentParser;
 
 class FileLoader
 {
     /**
      * The Application implementation.
-     *
-     * @var \Illuminate\Contracts\Foundation\Application
      */
-    protected $app;
+    protected Application $app;
 
     /**
      * The cache repository implementation.
-     *
-     * @var \Illuminate\Contracts\Cache\Repository
      */
-    protected $cache;
+    protected mixed $cache;
 
     /**
      * The filesystem implementation.
-     *
-     * @var \Illuminate\Filesystem\Filesystem
      */
-    protected $files;
+    protected Filesystem $files;
 
     /**
      * Construct a new File loader.
-     *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @param  \Illuminate\Contracts\Cache\Repository  $cache
-     * @param  \Illuminate\Filesystem\Filesystem  $files
      */
     public function __construct(Application $app, Cache $cache, Filesystem $files)
     {
@@ -48,14 +38,9 @@ class FileLoader
     /**
      * Get documentation by version and filename.
      *
-     * @param  string  $path
-     * @param  string  $filename
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return array
+     * @throws FileNotFoundException
      */
-    public function getDocumentation($path, $filename)
+    public function getDocumentation(string $path, string $filename): array
     {
         if ($this->files->isDirectory("{$path}/src/{$filename}")) {
             $filename = "{$filename}/index";
@@ -72,54 +57,38 @@ class FileLoader
 
     /**
      * Get table of content.
-     *
-     * @param  string  $toc
-     *
-     * @return string
      */
-    protected function getTableOfContent($toc)
+    protected function getTableOfContent(string $toc): mixed
     {
         return $this->loadContent($toc);
     }
 
     /**
      * Get content body.
-     *
-     * @param  string  $document
-     *
-     * @return mixed
      */
-    protected function getBodyContent($document)
+    protected function getBodyContent(string $document): mixed
     {
         return $this->loadContent($document);
     }
 
     /**
      * Load content.
-     *
-     * @param  string  $file
-     *
-     * @return mixed
      */
-    protected function loadContent($file)
+    protected function loadContent(string $file): mixed
     {
-        //return $this->cache->rememberForever("doc.{$file}", function () use ($file) {
-            $this->validateFileDoesExist($file);
+        $this->validateFileDoesExist($file);
 
-            $content = $this->files->get($file);
+        $content = $this->files->get($file);
 
-            return $this->getParser()->parse($content);
-        //});
+        return $this->getParser()->parse($content);
     }
 
     /**
      * Validate if file does exist.
      *
-     * @param  string  $file
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
-    protected function validateFileDoesExist($file)
+    protected function validateFileDoesExist(string $file): void
     {
         if (! $this->files->exists($file)) {
             throw new FileNotFoundException();
@@ -128,10 +97,8 @@ class FileLoader
 
     /**
      * Get markdown document parser.
-     *
-     * @return \Kurenai\DocumentParser
      */
-    protected function getParser()
+    protected function getParser(): DocumentParser
     {
         return $this->app->make(DocumentParser::class);
     }

@@ -3,63 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Documentation\Viewer;
-use Kurenai\Contracts\Document;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Kurenai\Contracts\Document;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DocumentationController extends Controller
 {
     /**
-     * Show documentation.
-     *
-     * @param  \App\Documentation\Viewer  $processor
-     * @param  string   $version
-     * @param  string   $filename
-     *
-     * @return mixed
+     * Show documentation index.
      */
-    public function index(Viewer $processor, $version = 'v1')
+    public function index(Viewer $processor, string $version = 'v1'): mixed
     {
         return $this->show($processor, $version, 'index');
     }
 
     /**
-     * Show documentation.
-     *
-     * @param  \App\Documentation\Viewer  $processor
-     * @param  string   $version
-     * @param  string   $filename
-     *
-     * @return mixed
+     * Show documentation page.
      */
-    public function show(Viewer $processor, $version = 'v1', $filename = 'index')
+    public function show(Viewer $processor, string $version = 'v1', string $filename = 'index'): mixed
     {
         return $processor->show($this, $version, $filename);
     }
 
     /**
-     * Redirect.
-     *
-     * @param  string  $to
-     *
-     * @return mixed
+     * Redirect to documentation page.
      */
-    public function redirectDocumentation($to)
+    public function redirectDocumentation(string $to): mixed
     {
         return redirect($to, 301);
     }
 
     /**
      * Display documentation.
-     *
-     * @param  string  $version
-     * @param  \Kurenai\Document  $toc
-     * @param  \Kurenai\Document  $document
-     * @param  \App\Documentation\Viewer $processor
-     *
-     * @return mixed
      */
-    public function showDocumentation($version, Document $toc, Document $document, Viewer $processor)
+    public function showDocumentation(string $version, Document $toc, Document $document, Viewer $processor): mixed
     {
         return view('documentation', [
             'toc'      => $toc,
@@ -76,14 +53,10 @@ class DocumentationController extends Controller
     /**
      * Handle documentation not found.
      *
-     * @param \Illuminate\Contracts\Filesystem\FileNotFoundException  $e
-     * @param string  $version
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws NotFoundHttpException
      */
-    public function documentationNotFound(FileNotFoundException $e, $version)
+    public function documentationNotFound(FileNotFoundException $e, string $version): never
     {
         throw new NotFoundHttpException();
     }
-
 }

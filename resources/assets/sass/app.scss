@@ -42,7 +42,7 @@
 @import "documentation/variables";
 @import "documentation/mixins";
 
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "bootstrap-sass/assets/stylesheets/bootstrap";
 
 // Core CSS
 @import "documentation/content";
@@ -76,3 +76,7 @@
 @import "documentation/blog";
 
 @import "documentation/skins/skin-pink";
+
+main#app {
+  margin-top: 90px;
+}
