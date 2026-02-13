@@ -9,19 +9,3 @@ window._ = _;
 
 import jQuery from 'jquery';
 window.$ = window.jQuery = jQuery;
-
-// Minimal collapse behavior for the top navbar.
-$(document).on('click', '[data-toggle="collapse"]', function (e) {
-  var target = $(this).attr('data-target');
-  if (!target) {
-    return;
-  }
-
-  var $target = $(target);
-  if (!$target.length) {
-    return;
-  }
-
-  e.preventDefault();
-  $target.toggleClass('in');
-});

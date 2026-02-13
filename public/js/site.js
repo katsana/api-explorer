@@ -146,6 +146,7 @@
     }
 
     var headerOffset = 110;
+    var hashAdjustedOnLoad = false;
 
     function scrollToHash(hash, smooth) {
       if (!hash) {
@@ -202,7 +203,7 @@
     // Fix initial page load with hash (e.g. /v1/vehicles#single-vehicle).
     if (window.location.hash) {
       setTimeout(function () {
-        scrollToHash(window.location.hash, false);
+        hashAdjustedOnLoad = scrollToHash(window.location.hash, false);
       }, 0);
     }
 
@@ -212,9 +213,11 @@
     if (stickySidenav && sidebar) {
       var initialWidth = stickySidenav.getBoundingClientRect().width;
       var stickyTop = 0;
-      var sidebarTop = sidebar.getBoundingClientRect().top + window.scrollY;
-      var stickyGap = 20;
-      var stickyStartY = sidebarTop;
+      var stickyStartY = 0;
+
+      function getDocumentTop(el) {
+        return el.getBoundingClientRect().top + window.scrollY;
+      }
 
       var recalculateStickyMetrics = function () {
         var wasFixed = stickySidenav.style.position === 'fixed';
@@ -225,16 +228,19 @@
         }
 
         initialWidth = stickySidenav.getBoundingClientRect().width;
-        var initialTop = Math.max(0, Math.round(stickySidenav.getBoundingClientRect().top));
         var header = document.querySelector('.site-header');
+        var safeGap = 20;
+        var sidebarPaddingTop = parseFloat(window.getComputedStyle(sidebar).paddingTop) || 0;
+        var sidebarBaseTop = Math.max(0, Math.round(getDocumentTop(sidebar) + sidebarPaddingTop));
+        var minTop = safeGap;
+
         if (header) {
-          var minTop = Math.max(0, Math.round(header.getBoundingClientRect().height + stickyGap));
-          stickyTop = Math.max(minTop, initialTop);
-        } else {
-          stickyTop = Math.max(stickyGap, initialTop);
+          minTop = Math.max(0, Math.round(header.getBoundingClientRect().bottom + safeGap));
         }
-        sidebarTop = sidebar.getBoundingClientRect().top + window.scrollY;
-        stickyStartY = Math.max(0, sidebarTop - stickyTop);
+
+        stickyTop = Math.max(minTop, sidebarBaseTop);
+
+        stickyStartY = Math.max(0, Math.round(getDocumentTop(sidebar) - stickyTop));
       };
 
       var applySticky = function () {
@@ -245,7 +251,7 @@
           return;
         }
 
-        if (window.scrollY > stickyStartY) {
+        if (window.scrollY >= stickyStartY) {
           stickySidenav.style.position = 'fixed';
           stickySidenav.style.top = stickyTop + 'px';
           stickySidenav.style.width = initialWidth + 'px';
@@ -261,8 +267,20 @@
         recalculateStickyMetrics();
         applySticky();
       });
+      window.addEventListener('load', function () {
+        recalculateStickyMetrics();
+        applySticky();
+      });
       recalculateStickyMetrics();
       applySticky();
+
+      // Hash-based initial scroll can happen after first sticky calculation.
+      setTimeout(function () {
+        if (window.location.hash || hashAdjustedOnLoad) {
+          recalculateStickyMetrics();
+          applySticky();
+        }
+      }, 50);
     }
   });
 })();

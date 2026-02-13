@@ -15,6 +15,20 @@
 
     <!-- Vite Styles -->
     @vite(['resources/assets/sass/app.scss'])
+    <style>
+      .site-header .navbar,
+      .site-header.navbar-sm .navbar,
+      .site-header.navbar-lg .navbar {
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+      }
+
+      .site-header .navbar-brand > img,
+      .site-header.navbar-sm .navbar-brand > img,
+      .site-header.navbar-lg .navbar-brand > img {
+        max-height: 36px !important;
+      }
+    </style>
 
     <!-- Favicons -->
   </head>
@@ -97,6 +111,7 @@
     <!-- Vendor Scripts -->
     <script src="{{ asset('vendors/clipboard.js/clipboard.js') }}"></script>
     <script src="{{ asset('vendors/prism/prism.js') }}"></script>
+    <!-- Keep sidebar/navigation behavior in a standalone script (not Vite JS bundle). -->
     <script src="{{ asset('js/site.js') }}"></script>
 
   </body>
