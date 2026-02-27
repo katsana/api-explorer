@@ -3,7 +3,12 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "docker:composer": "docker compose run --rm builder composer install",
+        "docker:npm": "docker compose run --rm builder npm ci",
+        "docker:build": "docker compose run --rm builder npm run build",
+        "docker:dev": "docker compose run --rm --service-ports builder npm run build",
+        "docker:watch": "docker compose run --rm --service-ports builder npm run dev"
     },
     "devDependencies": {
         "bootstrap-sass": "^3.4.3",

@@ -1,0 +1,134 @@
+pipeline {
+  agent any
+
+  options {
+    timestamps()
+    disableConcurrentBuilds()
+    buildDiscarder(logRotator(numToKeepStr: '20'))
+  }
+
+  parameters {
+    string(name: 'DEPLOY_ENV', defaultValue: 'production', description: 'Deployment environment name')
+    string(name: 'AWS_REGION', defaultValue: 'ap-southeast-1', description: 'AWS region for S3/SSM')
+    string(name: 'S3_BUCKET', defaultValue: 'katsana-releases', description: 'S3 bucket for artifacts')
+    string(name: 'S3_PREFIX', defaultValue: 'production/api-explorer', description: 'S3 key prefix for artifacts')
+    string(name: 'TARGET_HOST_GROUP', defaultValue: 'api_explorer', description: 'Ansible inventory host group')
+    booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Run Ansible deploy after upload')
+  }
+
+  environment {
+    APP_NAME = 'katsana-api-explorer'
+    BUILD_TS = ''
+    DOCKER_IMAGE = "api-explorer-builder:${env.BUILD_NUMBER}"
+    ARTIFACT_NAME = ''
+    ARTIFACT_PATH = ''
+    LEGACY_WORKSPACE_PATH = '/var/lib/jenkins/workspace/prod-places'
+    LEGACY_ARTIFACT_PATH = '/var/lib/jenkins/artifacts/prod-places'
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        sshagent(['katsana-jenkins']) {
+          checkout scm
+        }
+        script {
+          env.BUILD_TS = sh(returnStdout: true, script: 'date -u +%Y%m%d_%H%M%S').trim()
+          env.GIT_SHORT_SHA = sh(returnStdout: true, script: 'git rev-parse --short=8 HEAD').trim()
+          env.ARTIFACT_NAME = "${env.APP_NAME}-${env.BUILD_TS}-${env.GIT_SHORT_SHA}.tar.gz"
+          env.ARTIFACT_PATH = "${env.LEGACY_ARTIFACT_PATH}/${env.ARTIFACT_NAME}"
+        }
+      }
+    }
+
+    stage('Build Artifact (Docker)') {
+      steps {
+        sh '''
+          set -euo pipefail
+
+          mkdir -p "${LEGACY_WORKSPACE_PATH}" "${LEGACY_ARTIFACT_PATH}"
+          mkdir -p build/release
+          docker build -f .docker/Dockerfile -t "${DOCKER_IMAGE}" .
+
+          docker run --rm \
+            -v "$PWD:/app" \
+            -w /app \
+            "${DOCKER_IMAGE}" \
+            bash -lc '
+              set -euo pipefail
+              composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+              npm ci
+              npm run build
+            '
+
+          rsync -a --delete \
+            --exclude ".git" \
+            --exclude ".github" \
+            --exclude ".docker" \
+            --exclude "deploy" \
+            --exclude "node_modules" \
+            --exclude "tests" \
+            --exclude "storage/logs/*" \
+            --exclude ".env" \
+            --exclude "/build" \
+            ./ build/release/
+
+          rsync -a --delete ./build/release/ "${LEGACY_WORKSPACE_PATH}/"
+          tar -czf "${ARTIFACT_PATH}" -C "${LEGACY_WORKSPACE_PATH}" .
+          cp "${ARTIFACT_PATH}" "build/${ARTIFACT_NAME}"
+        '''
+
+        archiveArtifacts artifacts: 'build/*.tar.gz', fingerprint: true
+      }
+    }
+
+    stage('Upload Artifact to S3') {
+      steps {
+        withAWS(region: "${params.AWS_REGION}", credentials: 'aws-release') {
+          sh '''
+            set -euo pipefail
+            aws s3 cp "${ARTIFACT_PATH}" "s3://${S3_BUCKET}/${S3_PREFIX}/${ARTIFACT_NAME}"
+            aws s3 cp "${ARTIFACT_PATH}" "s3://${S3_BUCKET}/${S3_PREFIX}/${APP_NAME}-latest.tar.gz"
+          '''
+        }
+      }
+    }
+
+    stage('Deploy via Ansible') {
+      when {
+        expression { return params.DEPLOY }
+      }
+      steps {
+        withCredentials([file(credentialsId: 'ansvault', variable: 'ANSIBLE_VAULT_PASSWORD_FILE')]) {
+          ansiblePlaybook(
+            playbook: 'deploy/ansible/playbooks/deploy.yml',
+            inventory: 'deploy/ansible/inventories/production.ini',
+            extras: "--vault-password-file=${ANSIBLE_VAULT_PASSWORD_FILE}",
+            colorized: true,
+            extraVars: [
+              deploy_env: "${params.DEPLOY_ENV}",
+              target_host_group: "${params.TARGET_HOST_GROUP}",
+              aws_region: "${params.AWS_REGION}",
+              artifact_bucket: "${params.S3_BUCKET}",
+              artifact_key: "${params.S3_PREFIX}/${env.ARTIFACT_NAME}",
+              build_number: "${env.BUILD_NUMBER}",
+              git_sha: "${env.GIT_SHORT_SHA}"
+            ]
+          )
+        }
+      }
+    }
+  }
+
+  post {
+    success {
+      echo "Build and deployment completed. Artifact: ${env.ARTIFACT_NAME}"
+    }
+    failure {
+      echo 'Pipeline failed. Check stage logs for details.'
+    }
+    always {
+      cleanWs(cleanWhenNotBuilt: false)
+    }
+  }
+}
