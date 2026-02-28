@@ -121,6 +121,19 @@ pipeline {
             if (!artifactName || artifactName == 'null') {
               error("Invalid artifact name: '${artifactName}'")
             }
+
+            echo """ansible-playbook /opt/ansible/playbooks/deploy_api_explorer_production.yml \\
+            -i /opt/ansible/inventories/production.ini \\
+            --vault-password-file=\$ANSIBLE_VAULT_PASSWORD_FILE \\
+            -e deploy_env=${params.DEPLOY_ENV} \\
+            -e target_host_group=${params.TARGET_HOST_GROUP} \\
+            -e aws_region=${params.AWS_REGION} \\
+            -e artifact_bucket=${params.S3_BUCKET} \\
+            -e artifact_key=${params.S3_PREFIX}/${artifactName} \\
+            -e APP_WORKSPACE=${env.WORKSPACE} \\
+            -e build_number=${env.BUILD_NUMBER} \\
+            -e git_sha=${env.GIT_SHORT_SHA}"""
+            
             ansiblePlaybook(
               playbook: '/opt/ansible/playbooks/deploy_api_explorer_production.yml',
               inventory: '/opt/ansible/inventories/production.ini',
