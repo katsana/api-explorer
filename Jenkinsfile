@@ -21,9 +21,7 @@ pipeline {
     BUILD_TS = ''
     DOCKER_IMAGE = "api-explorer-builder:${env.BUILD_NUMBER}"
     ARTIFACT_NAME = ''
-    ARTIFACT_PATH = ''
-    LEGACY_WORKSPACE_PATH = '/var/lib/jenkins/workspace/prod-places'
-    LEGACY_ARTIFACT_PATH = '/var/lib/jenkins/artifacts/prod-places'
+    RELEASE_DIR = 'build/release'
   }
 
   stages {
@@ -36,7 +34,6 @@ pipeline {
           env.BUILD_TS = sh(returnStdout: true, script: 'date -u +%Y%m%d_%H%M%S').trim()
           env.GIT_SHORT_SHA = sh(returnStdout: true, script: 'git rev-parse --short=8 HEAD').trim()
           env.ARTIFACT_NAME = "${env.APP_NAME}-${env.BUILD_TS}-${env.GIT_SHORT_SHA}.tar.gz"
-          env.ARTIFACT_PATH = "${env.LEGACY_ARTIFACT_PATH}/${env.ARTIFACT_NAME}"
         }
       }
     }
@@ -46,8 +43,7 @@ pipeline {
         sh '''
           set -euo pipefail
 
-          mkdir -p "${LEGACY_WORKSPACE_PATH}" "${LEGACY_ARTIFACT_PATH}"
-          mkdir -p build/release
+          mkdir -p "${RELEASE_DIR}" build
           docker build -f .docker/Dockerfile -t "${DOCKER_IMAGE}" .
 
           docker run --rm \
@@ -71,11 +67,9 @@ pipeline {
             --exclude "storage/logs/*" \
             --exclude ".env" \
             --exclude "/build" \
-            ./ build/release/
+            ./ "${RELEASE_DIR}/"
 
-          rsync -a --delete ./build/release/ "${LEGACY_WORKSPACE_PATH}/"
-          tar -czf "${ARTIFACT_PATH}" -C "${LEGACY_WORKSPACE_PATH}" .
-          cp "${ARTIFACT_PATH}" "build/${ARTIFACT_NAME}"
+          tar -czf "build/${ARTIFACT_NAME}" -C "${RELEASE_DIR}" .
         '''
 
         archiveArtifacts artifacts: 'build/*.tar.gz', fingerprint: true
@@ -87,6 +81,7 @@ pipeline {
         withAWS(region: "${params.AWS_REGION}", credentials: 'aws-release') {
           sh '''
             set -euo pipefail
+            ARTIFACT_PATH="build/${ARTIFACT_NAME}"
             aws s3 cp "${ARTIFACT_PATH}" "s3://${S3_BUCKET}/${S3_PREFIX}/${ARTIFACT_NAME}"
             aws s3 cp "${ARTIFACT_PATH}" "s3://${S3_BUCKET}/${S3_PREFIX}/${APP_NAME}-latest.tar.gz"
           '''
