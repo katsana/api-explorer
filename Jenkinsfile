@@ -30,21 +30,27 @@ pipeline {
         sshagent(['katsana-jenkins']) {
           checkout scm
         }
+        sh '''
+          set -euo pipefail
+          BUILD_TS="$(date -u +%Y%m%d_%H%M%S)"
+          GIT_SHORT_SHA="$(git rev-parse --short=8 HEAD)"
+          ARTIFACT_NAME="${APP_NAME}-${BUILD_TS}-${GIT_SHORT_SHA}.tar.gz"
+          echo "${ARTIFACT_NAME}" > .artifact_name
+        '''
         script {
-          env.BUILD_TS = sh(returnStdout: true, script: 'date -u +%Y%m%d_%H%M%S').trim()
-          env.GIT_SHORT_SHA = sh(returnStdout: true, script: 'git rev-parse --short=8 HEAD').trim()
-          env.ARTIFACT_NAME = "${env.APP_NAME}-${env.BUILD_TS}-${env.GIT_SHORT_SHA}.tar.gz"
-          writeFile file: '.artifact_name', text: "${env.ARTIFACT_NAME}\n"
+          env.ARTIFACT_NAME = readFile('.artifact_name').trim()
         }
       }
     }
 
-    stage('Build Artifact (Docker)') {
+    stage('Build Artifact') {
       steps {
         sh '''
           set -euo pipefail
 
           ARTIFACT_NAME="$(cat .artifact_name)"
+          test -n "${ARTIFACT_NAME}"
+          test "${ARTIFACT_NAME}" != "null"
           mkdir -p "${RELEASE_DIR}" build
           docker build -f .docker/Dockerfile -t "${DOCKER_IMAGE}" .
 
@@ -91,7 +97,10 @@ pipeline {
           sh '''
             set -euo pipefail
             ARTIFACT_NAME="$(cat .artifact_name)"
+            test -n "${ARTIFACT_NAME}"
+            test "${ARTIFACT_NAME}" != "null"
             ARTIFACT_PATH="build/${ARTIFACT_NAME}"
+            test -f "${ARTIFACT_PATH}"
             aws s3 cp "${ARTIFACT_PATH}" "s3://${S3_BUCKET}/${S3_PREFIX}/${ARTIFACT_NAME}"
             aws s3 cp "${ARTIFACT_PATH}" "s3://${S3_BUCKET}/${S3_PREFIX}/${APP_NAME}-latest.tar.gz"
           '''
@@ -107,6 +116,9 @@ pipeline {
         withCredentials([file(credentialsId: 'ansvault', variable: 'ANSIBLE_VAULT_PASSWORD_FILE')]) {
           script {
             def artifactName = readFile('.artifact_name').trim()
+            if (!artifactName || artifactName == 'null') {
+              error("Invalid artifact name: '${artifactName}'")
+            }
             ansiblePlaybook(
               playbook: '/opt/ansible/playbooks/deploy_api_explorer_production.yml',
               inventory: '/opt/ansible/inventories/production.ini',
