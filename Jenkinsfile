@@ -12,7 +12,7 @@ pipeline {
     string(name: 'AWS_REGION', defaultValue: 'ap-southeast-1', description: 'AWS region for S3/SSM')
     string(name: 'S3_BUCKET', defaultValue: 'katsana-releases', description: 'S3 bucket for artifacts')
     string(name: 'S3_PREFIX', defaultValue: 'production/api-explorer', description: 'S3 key prefix for artifacts')
-    string(name: 'TARGET_HOST_GROUP', defaultValue: 'api_explorer', description: 'Ansible inventory host group')
+    string(name: 'TARGET_HOST_GROUP', defaultValue: 'api_explorer_production', description: 'Ansible inventory host group')
     booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Run Ansible deploy after upload')
   }
 
@@ -34,6 +34,7 @@ pipeline {
           env.BUILD_TS = sh(returnStdout: true, script: 'date -u +%Y%m%d_%H%M%S').trim()
           env.GIT_SHORT_SHA = sh(returnStdout: true, script: 'git rev-parse --short=8 HEAD').trim()
           env.ARTIFACT_NAME = "${env.APP_NAME}-${env.BUILD_TS}-${env.GIT_SHORT_SHA}.tar.gz"
+          writeFile file: '.artifact_name', text: "${env.ARTIFACT_NAME}\n"
         }
       }
     }
@@ -43,6 +44,7 @@ pipeline {
         sh '''
           set -euo pipefail
 
+          ARTIFACT_NAME="$(cat .artifact_name)"
           mkdir -p "${RELEASE_DIR}" build
           docker build -f .docker/Dockerfile -t "${DOCKER_IMAGE}" .
 
@@ -81,6 +83,7 @@ pipeline {
         withAWS(region: "${params.AWS_REGION}", credentials: 'aws-release') {
           sh '''
             set -euo pipefail
+            ARTIFACT_NAME="$(cat .artifact_name)"
             ARTIFACT_PATH="build/${ARTIFACT_NAME}"
             aws s3 cp "${ARTIFACT_PATH}" "s3://${S3_BUCKET}/${S3_PREFIX}/${ARTIFACT_NAME}"
             aws s3 cp "${ARTIFACT_PATH}" "s3://${S3_BUCKET}/${S3_PREFIX}/${APP_NAME}-latest.tar.gz"
@@ -95,21 +98,24 @@ pipeline {
       }
       steps {
         withCredentials([file(credentialsId: 'ansvault', variable: 'ANSIBLE_VAULT_PASSWORD_FILE')]) {
-          ansiblePlaybook(
-            playbook: 'deploy/ansible/playbooks/deploy.yml',
-            inventory: 'deploy/ansible/inventories/production.ini',
-            extras: "--vault-password-file=${ANSIBLE_VAULT_PASSWORD_FILE}",
-            colorized: true,
-            extraVars: [
-              deploy_env: "${params.DEPLOY_ENV}",
-              target_host_group: "${params.TARGET_HOST_GROUP}",
-              aws_region: "${params.AWS_REGION}",
-              artifact_bucket: "${params.S3_BUCKET}",
-              artifact_key: "${params.S3_PREFIX}/${env.ARTIFACT_NAME}",
-              build_number: "${env.BUILD_NUMBER}",
-              git_sha: "${env.GIT_SHORT_SHA}"
-            ]
-          )
+          script {
+            def artifactName = readFile('.artifact_name').trim()
+            ansiblePlaybook(
+              playbook: '/opt/ansible/playbooks/deploy_api_explorer_production.yml',
+              inventory: '/opt/ansible/inventories/production.ini',
+              extras: "--vault-password-file=${ANSIBLE_VAULT_PASSWORD_FILE}",
+              colorized: true,
+              extraVars: [
+                deploy_env: "${params.DEPLOY_ENV}",
+                target_host_group: "${params.TARGET_HOST_GROUP}",
+                aws_region: "${params.AWS_REGION}",
+                artifact_bucket: "${params.S3_BUCKET}",
+                artifact_key: "${params.S3_PREFIX}/${artifactName}",
+                build_number: "${env.BUILD_NUMBER}",
+                git_sha: "${env.GIT_SHORT_SHA}"
+              ]
+            )
+          }
         }
       }
     }
