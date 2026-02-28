@@ -14,6 +14,7 @@ pipeline {
     string(name: 'S3_PREFIX', defaultValue: 'production/api-explorer', description: 'S3 key prefix for artifacts')
     string(name: 'TARGET_HOST_GROUP', defaultValue: 'api_explorer_production', description: 'Ansible inventory host group')
     booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Run Ansible deploy after upload')
+    booleanParam(name: 'KEEP_WORKSPACE', defaultValue: false, description: 'Skip cleanWs and keep workspace after build')
   }
 
   environment {
@@ -32,6 +33,7 @@ pipeline {
         }
         sh '''
           set -euo pipefail
+          echo "Jenkins WORKSPACE: ${WORKSPACE}"
           BUILD_TS="$(date -u +%Y%m%d_%H%M%S)"
           GIT_SHORT_SHA="$(git rev-parse --short=8 HEAD)"
           ARTIFACT_NAME="${APP_NAME}-${BUILD_TS}-${GIT_SHORT_SHA}.tar.gz"
@@ -130,6 +132,7 @@ pipeline {
                 aws_region: "${params.AWS_REGION}",
                 artifact_bucket: "${params.S3_BUCKET}",
                 artifact_key: "${params.S3_PREFIX}/${artifactName}",
+                APP_WORKSPACE: "${env.WORKSPACE}",
                 build_number: "${env.BUILD_NUMBER}",
                 git_sha: "${env.GIT_SHORT_SHA}"
               ]
@@ -148,7 +151,13 @@ pipeline {
       echo 'Pipeline failed. Check stage logs for details.'
     }
     always {
-      cleanWs(cleanWhenNotBuilt: false)
+      script {
+        if (params.KEEP_WORKSPACE) {
+          echo "Skipping workspace cleanup because KEEP_WORKSPACE=true. Workspace: ${env.WORKSPACE}"
+        } else {
+          cleanWs(cleanWhenNotBuilt: false)
+        }
+      }
     }
   }
 }
