@@ -8,13 +8,7 @@ pipeline {
   }
 
   parameters {
-    string(name: 'DEPLOY_ENV', defaultValue: 'production', description: 'Deployment environment name')
-    string(name: 'AWS_REGION', defaultValue: 'ap-southeast-1', description: 'AWS region for S3/SSM')
-    string(name: 'S3_BUCKET', defaultValue: 'katsana-releases', description: 'S3 bucket for artifacts')
-    string(name: 'S3_PREFIX', defaultValue: 'production/api-explorer', description: 'S3 key prefix for artifacts')
-    string(name: 'TARGET_HOST_GROUP', defaultValue: 'api_explorer_production', description: 'Ansible inventory host group')
     booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Run Ansible deploy after upload')
-    booleanParam(name: 'KEEP_WORKSPACE', defaultValue: false, description: 'Skip cleanWs and keep workspace after build')
   }
 
   environment {
@@ -23,6 +17,10 @@ pipeline {
     DOCKER_IMAGE = "api-explorer-builder:${env.BUILD_NUMBER}"
     ARTIFACT_NAME = ''
     RELEASE_DIR = 'build/release'
+    DEPLOY_ENV = 'production'
+    AWS_REGION = 'ap-southeast-1'
+    S3_BUCKET = 'katsana-releases'
+    S3_PREFIX = 'production/api-explorer'
   }
 
   stages {
@@ -95,7 +93,7 @@ pipeline {
 
     stage('Upload Artifact to S3') {
       steps {
-        withAWS(region: "${params.AWS_REGION}", credentials: 'aws-release') {
+        withAWS(region: "${AWS_REGION}", credentials: 'aws-release') {
           sh '''
             set -euo pipefail
             ARTIFACT_NAME="$(cat .artifact_name)"
@@ -117,37 +115,14 @@ pipeline {
       steps {
         withCredentials([file(credentialsId: 'ansvault', variable: 'ANSIBLE_VAULT_PASSWORD_FILE')]) {
           script {
-            def artifactName = readFile('.artifact_name').trim()
-            if (!artifactName || artifactName == 'null') {
-              error("Invalid artifact name: '${artifactName}'")
-            }
-
-            echo """ansible-playbook /opt/ansible/playbooks/deploy_api_explorer_production.yml \\
-            -i /opt/ansible/inventories/production.ini \\
-            --vault-password-file=\$ANSIBLE_VAULT_PASSWORD_FILE \\
-            -e deploy_env=${params.DEPLOY_ENV} \\
-            -e target_host_group=${params.TARGET_HOST_GROUP} \\
-            -e aws_region=${params.AWS_REGION} \\
-            -e artifact_bucket=${params.S3_BUCKET} \\
-            -e artifact_key=${params.S3_PREFIX}/${artifactName} \\
-            -e APP_WORKSPACE=${env.WORKSPACE} \\
-            -e build_number=${env.BUILD_NUMBER} \\
-            -e git_sha=${env.GIT_SHORT_SHA}"""
-            
             ansiblePlaybook(
               playbook: '/opt/ansible/playbooks/deploy_api_explorer_production.yml',
               inventory: '/opt/ansible/inventories/production.ini',
               extras: "--vault-password-file=${ANSIBLE_VAULT_PASSWORD_FILE}",
               colorized: true,
               extraVars: [
-                deploy_env: "${params.DEPLOY_ENV}",
-                target_host_group: "${params.TARGET_HOST_GROUP}",
-                aws_region: "${params.AWS_REGION}",
-                artifact_bucket: "${params.S3_BUCKET}",
-                artifact_key: "${params.S3_PREFIX}/${artifactName}",
-                APP_WORKSPACE: "${env.WORKSPACE}",
-                build_number: "${env.BUILD_NUMBER}",
-                git_sha: "${env.GIT_SHORT_SHA}"
+                deploy_env: "${DEPLOY_ENV}",
+                build_number: "${env.BUILD_NUMBER}"
               ]
             )
           }
@@ -164,13 +139,7 @@ pipeline {
       echo 'Pipeline failed. Check stage logs for details.'
     }
     always {
-      script {
-        if (params.KEEP_WORKSPACE) {
-          echo "Skipping workspace cleanup because KEEP_WORKSPACE=true. Workspace: ${env.WORKSPACE}"
-        } else {
-          cleanWs(cleanWhenNotBuilt: false)
-        }
-      }
+      cleanWs(cleanWhenNotBuilt: false)
     }
   }
 }
