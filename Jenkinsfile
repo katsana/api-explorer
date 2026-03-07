@@ -109,18 +109,20 @@ pipeline {
         expression { return params.DEPLOY }
       }
       steps {
-        withCredentials([file(credentialsId: 'ansvault', variable: 'ANSIBLE_VAULT_PASSWORD_FILE')]) {
-          script {
-            ansiblePlaybook(
-              playbook: '/opt/ansible/playbooks/deploy_api_explorer_production.yml',
-              inventory: '/opt/ansible/inventories/production.ini',
-              extras: "--vault-password-file=${ANSIBLE_VAULT_PASSWORD_FILE}",
-              colorized: true,
-              extraVars: [
-                deploy_env: "${DEPLOY_ENV}",
-                build_number: "${env.BUILD_NUMBER}"
-              ]
-            )
+        withAWS(region: "${AWS_REGION}", credentials: 'aws-release') {
+          withCredentials([file(credentialsId: 'ansvault', variable: 'ANSIBLE_VAULT_PASSWORD_FILE')]) {
+            script {
+              ansiblePlaybook(
+                playbook: '/opt/ansible/playbooks/deploy_api_explorer_production.yml',
+                inventory: '/opt/ansible/inventories/production.ini',
+                extras: "--vault-password-file=${ANSIBLE_VAULT_PASSWORD_FILE}",
+                colorized: true,
+                extraVars: [
+                  deploy_env: "${DEPLOY_ENV}",
+                  build_number: "${env.BUILD_NUMBER}"
+                ]
+              )
+            }
           }
         }
       }
