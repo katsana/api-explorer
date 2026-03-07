@@ -80,14 +80,10 @@ pipeline {
           tar -czf "build/${ARTIFACT_NAME}" -C "${RELEASE_DIR}" .
         '''
 
-        script {
-          def artifactName = readFile('.artifact_name').trim()
-          sh '''
-            set -euo pipefail
-            test -f "build/$(cat .artifact_name)"
-          '''
-          archiveArtifacts artifacts: "build/${artifactName}", fingerprint: true
-        }
+        sh '''
+          set -euo pipefail
+          test -f "build/$(cat .artifact_name)"
+        '''
       }
     }
 
